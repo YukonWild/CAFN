@@ -6,308 +6,175 @@
     <title>Dá Kų Cultural Centre - Energy Analysis Report</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <link rel="stylesheet" href="css/styles.css">
     <style>
-        :root {
-            --cafn-dark: #1a1a2e;
-            --cafn-red: #c50a27;
-            --cafn-white: #ffffff;
-            --primary: #005f73;
-            --secondary: #0a9396;
-            --accent: #ee9b00;
-            --success: #2e7d32;
-            --warning: #f57c00;
-            --light: #f4f6f7;
-            --text: #2c3e50;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--light);
-            color: var(--text);
-        }
-
-        /* Header */
-        .report-header {
-            background: linear-gradient(135deg, var(--cafn-dark) 0%, #2d2d4a 100%);
-            color: var(--cafn-white);
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .report-header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-        }
-
-        .report-header .subtitle {
-            font-size: 1.1rem;
-            opacity: 0.85;
-            margin-bottom: 20px;
-        }
-
-        .report-header .meta {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .report-header .badge {
-            background: var(--cafn-red);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        /* Container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 30px 20px;
-        }
-
-        /* Section Headers */
-        .section-header {
-            margin: 40px 0 25px 0;
-            padding-bottom: 15px;
-            border-bottom: 3px solid var(--cafn-red);
-        }
-
-        .section-header h2 {
-            font-size: 1.6rem;
-            color: var(--cafn-dark);
-        }
-
-        .section-header p {
-            color: #666;
-            margin-top: 8px;
-        }
-
-        /* Executive Summary */
-        .executive-summary {
-            background: linear-gradient(135deg, var(--success) 0%, #1b5e20 100%);
-            color: white;
-            border-radius: 16px;
-            padding: 35px;
-            margin-bottom: 30px;
-        }
-
-        .executive-summary h2 {
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-        }
-
-        .summary-item {
-            text-align: center;
-        }
-
-        .summary-value {
-            font-size: 2.8rem;
-            font-weight: 700;
-            line-height: 1.1;
-        }
-
-        .summary-label {
-            font-size: 0.95rem;
-            opacity: 0.9;
-            margin-top: 5px;
-        }
-
-        /* KPI Grid */
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .kpi-card {
-            background: var(--cafn-white);
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            border-left: 5px solid var(--secondary);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .kpi-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-        }
-
-        .kpi-title {
-            font-size: 0.85rem;
-            color: #7f8c8d;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .kpi-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--cafn-dark);
-            margin: 10px 0 5px 0;
-        }
-
-        .kpi-sub {
-            font-size: 0.85rem;
-            color: var(--success);
-        }
-
-        /* Charts Grid */
-        .charts-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-            margin-bottom: 25px;
-        }
-
-        .chart-container {
-            background: var(--cafn-white);
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .chart-container.full-width {
-            grid-column: span 2;
-        }
-
-        .chart-container.tall {
-            min-height: 450px;
-        }
-
-        .chart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            flex-shrink: 0;
-        }
-
-        .chart-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--cafn-dark);
-        }
-
-        .chart-subtitle {
-            font-size: 0.85rem;
-            color: #666;
-            margin-top: 3px;
-        }
-
-        .chart-wrapper {
-            position: relative;
-            flex-grow: 1;
-            min-height: 300px;
-        }
-
-        .chart-note {
-            font-size: 0.8rem;
-            color: #888;
-            text-align: center;
-            margin-top: 12px;
-            flex-shrink: 0;
-        }
-
-        /* Table Styles */
-        .table-container {
-            background: var(--cafn-white);
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.95rem;
-        }
-
-        th {
-            background-color: var(--cafn-dark);
-            color: var(--cafn-white);
-            padding: 14px 15px;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        th:first-child { border-top-left-radius: 8px; }
-        th:last-child { border-top-right-radius: 8px; }
-
-        td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #eee;
-        }
-
-        tr:nth-child(even) { background-color: #f8f9fa; }
-        tr:hover { background-color: #f1f3f5; }
-
-        .trend-up { color: var(--success); font-weight: 600; }
-        .trend-down { color: #c62828; font-weight: 600; }
-        .highlight-row { background-color: #e8f5e9 !important; }
-
-        /* Footer */
-        footer {
-            background: var(--cafn-dark);
-            color: rgba(255,255,255,0.7);
-            text-align: center;
-            padding: 25px 20px;
-            font-size: 0.85rem;
-        }
-
-        footer a {
+        /* Page-specific styles */
+        .back-link {
+            display: inline-block;
             color: var(--cafn-white);
             text-decoration: none;
+            font-size: var(--font-size-sm);
+            opacity: 0.8;
+            margin-bottom: var(--space-md);
+            transition: opacity var(--transition-fast);
         }
 
-        /* Responsive */
-        @media (max-width: 900px) {
-            .charts-grid {
-                grid-template-columns: 1fr;
-            }
-            .chart-container.full-width {
-                grid-column: span 1;
-            }
-            .report-header h1 {
-                font-size: 1.6rem;
-            }
-            .summary-value {
-                font-size: 2rem;
-            }
+        .back-link:hover {
+            opacity: 1;
         }
 
-        /* Print Styles */
-        @media print {
-            .report-header {
-                background: var(--cafn-dark) !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            .chart-container { break-inside: avoid; }
+        .back-link::before {
+            content: '← ';
+        }
+
+        /* Expandable chart containers */
+        .chart-container.expandable {
+            cursor: pointer;
+        }
+
+        .chart-container.expandable::after {
+            content: 'Click to expand';
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-size: var(--font-size-xs);
+            color: var(--text-muted);
+            opacity: 0.6;
+            transition: opacity var(--transition-fast);
+        }
+
+        .chart-container.expandable:hover::after {
+            opacity: 1;
+        }
+
+        .chart-container.expanded {
+            position: fixed;
+            top: 5%;
+            left: 5%;
+            right: 5%;
+            bottom: 5%;
+            z-index: 1000;
+            border-radius: var(--radius-xl);
+        }
+
+        .chart-container.expanded::after {
+            content: 'Click to close';
+        }
+
+        .chart-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+        }
+
+        .chart-overlay.visible {
+            display: block;
+        }
+
+        /* Community Impact specific styles */
+        .impact-story {
+            background: linear-gradient(135deg, var(--cafn-dark) 0%, var(--cafn-dark-light) 100%);
+            color: var(--cafn-white);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            margin-bottom: var(--space-xl);
+        }
+
+        .impact-story h3 {
+            color: var(--cafn-red);
+            margin-bottom: var(--space-md);
+        }
+
+        .impact-story p {
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: var(--space-md);
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-xl);
+        }
+
+        .impact-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .impact-card h4 {
+            color: var(--success);
+            margin-bottom: var(--space-sm);
+        }
+
+        .impact-card .value {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        .impact-card p {
+            font-size: var(--font-size-sm);
+            margin: 0;
+        }
+
+        /* Quick Facts sidebar */
+        .quick-facts {
+            background: var(--gray-100);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .quick-facts h3 {
+            color: var(--cafn-dark);
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-sm);
+            border-bottom: 2px solid var(--cafn-red);
+        }
+
+        .quick-fact {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--gray-300);
+        }
+
+        .quick-fact:last-child {
+            border-bottom: none;
+        }
+
+        .quick-fact .label {
+            color: var(--text-secondary);
+        }
+
+        .quick-fact .value {
+            font-weight: 600;
+            color: var(--cafn-dark);
+        }
+
+        .quick-fact .value.positive {
+            color: var(--success);
         }
     </style>
 </head>
 <body>
 
+<!-- Overlay for expanded charts -->
+<div class="chart-overlay" id="chartOverlay" onclick="closeExpandedChart()"></div>
+
 <!-- Header -->
 <header class="report-header">
+    <a href="index.html" class="back-link">Back to Home</a>
     <h1>Dá Kų Cultural Centre</h1>
     <p class="subtitle">Building Efficiency & Energy Analysis Report</p>
     <div class="meta">
@@ -316,285 +183,452 @@
     </div>
 </header>
 
-<div class="container">
+<div class="container" style="padding: var(--space-xl) var(--space-lg);">
 
-    <!-- Executive Summary -->
-    <div class="executive-summary">
-        <h2>Executive Summary: Cost Savings Success</h2>
-        <div class="summary-grid">
-            <div class="summary-item">
-                <div class="summary-value" id="totalSavings">$54,437</div>
-                <div class="summary-label">Total HVAC Savings (2025)</div>
-            </div>
-            <div class="summary-item">
-                <div class="summary-value" id="efficiencyGain">41%</div>
-                <div class="summary-label">Efficiency Improvement</div>
-            </div>
-            <div class="summary-item">
-                <div class="summary-value" id="costReduction">$46K</div>
-                <div class="summary-label">Annual HVAC Cost Reduction</div>
-            </div>
-            <div class="summary-item">
-                <div class="summary-value" id="peakSavings">$8,318</div>
-                <div class="summary-label">Best Month (December)</div>
-            </div>
-        </div>
+    <!-- Tab Navigation -->
+    <div class="tab-nav" id="mainTabs">
+        <button class="tab-btn active" data-tab="executive" onclick="switchTab('executive')">
+            Executive Summary
+        </button>
+        <button class="tab-btn" data-tab="technical" onclick="switchTab('technical')">
+            Technical Detail
+        </button>
+        <button class="tab-btn" data-tab="community" onclick="switchTab('community')">
+            Community Impact
+        </button>
     </div>
 
-    <!-- KPI Cards -->
-    <div class="kpi-grid">
-        <div class="kpi-card" style="border-left-color: var(--success);">
-            <div class="kpi-title">2025 Total Cost</div>
-            <div class="kpi-value">$98,111</div>
-            <div class="kpi-sub">Down from $141,627 (2023)</div>
-        </div>
-        <div class="kpi-card" style="border-left-color: var(--primary);">
-            <div class="kpi-title">HVAC Cost 2025</div>
-            <div class="kpi-value">$66,765</div>
-            <div class="kpi-sub">Down from $112,783 (2023)</div>
-        </div>
-        <div class="kpi-card" style="border-left-color: var(--accent);">
-            <div class="kpi-title">Total Usage 2025</div>
-            <div class="kpi-value">283,500 kWh</div>
-            <div class="kpi-sub">35% reduction from 2023</div>
-        </div>
-        <div class="kpi-card" style="border-left-color: var(--cafn-dark);">
-            <div class="kpi-title">Heating Degree Days</div>
-            <div class="kpi-value">8,352</div>
-            <div class="kpi-sub">Climate severity tracked</div>
-        </div>
-    </div>
+    <!-- ========================================== -->
+    <!-- EXECUTIVE SUMMARY TAB -->
+    <!-- ========================================== -->
+    <div id="executive" class="tab-content">
 
-    <!-- Section: Cost & Savings -->
-    <div class="section-header">
-        <h2>Cost & Savings Analysis</h2>
-        <p>Tracking the financial impact of efficiency improvements and heat pump installation</p>
-    </div>
-
-    <div class="charts-grid">
-        <!-- Cumulative Savings Chart -->
-        <div class="chart-container">
-            <div class="chart-header">
-                <div>
-                    <div class="chart-title">Cumulative HVAC Savings (2025)</div>
-                    <div class="chart-subtitle">Monthly progression toward $54K goal</div>
+        <!-- Executive Summary Banner -->
+        <div class="executive-summary">
+            <h2>Cost Savings Success: $54,437 in 2025</h2>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="summary-value">$54,437</div>
+                    <div class="summary-label">Total HVAC Savings</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value">41%</div>
+                    <div class="summary-label">Efficiency Gain</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value">$46K</div>
+                    <div class="summary-label">Annual Cost Reduction</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value">$8,318</div>
+                    <div class="summary-label">Best Month (Dec)</div>
                 </div>
             </div>
-            <div class="chart-wrapper">
-                <canvas id="cumulativeSavingsChart"></canvas>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="kpi-grid">
+            <div class="kpi-card" style="--card-accent: var(--success);">
+                <div class="kpi-title">2025 Total Cost</div>
+                <div class="kpi-value">$98,111</div>
+                <div class="kpi-sub">Down from $141,627 (2023)</div>
+            </div>
+            <div class="kpi-card" style="--card-accent: var(--info);">
+                <div class="kpi-title">HVAC Cost 2025</div>
+                <div class="kpi-value">$66,765</div>
+                <div class="kpi-sub">Down from $112,783 (2023)</div>
+            </div>
+            <div class="kpi-card" style="--card-accent: var(--warning);">
+                <div class="kpi-title">Total Usage 2025</div>
+                <div class="kpi-value">283,500 kWh</div>
+                <div class="kpi-sub">35% reduction from 2023</div>
+            </div>
+            <div class="kpi-card" style="--card-accent: var(--cafn-dark);">
+                <div class="kpi-title">Heating Degree Days</div>
+                <div class="kpi-value">8,352</div>
+                <div class="kpi-sub">9% colder than 2023</div>
             </div>
         </div>
 
-        <!-- Monthly Savings Bar -->
-        <div class="chart-container">
-            <div class="chart-header">
-                <div>
-                    <div class="chart-title">Monthly HVAC Savings (2025)</div>
-                    <div class="chart-subtitle">Savings vs 2023 baseline costs</div>
+        <!-- Environmental Equivalents -->
+        <div class="section-header">
+            <h2>Environmental Impact</h2>
+            <p>What our efficiency gains mean for the environment</p>
+        </div>
+        <div id="execEnvEquivalents"></div>
+
+        <!-- Key Charts for Executives -->
+        <div class="section-header" style="margin-top: var(--space-2xl);">
+            <h2>Key Performance Charts</h2>
+            <p>Visual summary of cost savings and efficiency</p>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-container expandable" onclick="toggleChartExpand(this)">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Cumulative Savings (2025)</div>
+                        <div class="chart-subtitle">Growing savings throughout the year</div>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="execCumulativeChart"></canvas>
                 </div>
             </div>
-            <div class="chart-wrapper">
-                <canvas id="monthlySavingsChart"></canvas>
+
+            <div class="chart-container expandable" onclick="toggleChartExpand(this)">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Annual Cost Comparison</div>
+                        <div class="chart-subtitle">Total and HVAC costs by year</div>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="execAnnualChart"></canvas>
+                </div>
             </div>
         </div>
 
-        <!-- Annual Cost Comparison -->
-        <div class="chart-container full-width">
-            <div class="chart-header">
-                <div>
-                    <div class="chart-title">Annual Cost Comparison</div>
-                    <div class="chart-subtitle">Total building and HVAC costs by year</div>
-                </div>
-            </div>
-            <div class="chart-wrapper">
-                <canvas id="annualCostChart"></canvas>
-            </div>
+        <!-- 5-Year Projections -->
+        <div class="section-header" style="margin-top: var(--space-2xl);">
+            <h2>5-Year Savings Projection</h2>
+            <p>Projected cumulative savings if current efficiency is maintained</p>
         </div>
+        <div id="execProjections"></div>
 
-        <!-- Monthly HVAC Cost Profile -->
-        <div class="chart-container full-width tall">
-            <div class="chart-header">
-                <div>
-                    <div class="chart-title">Monthly HVAC Cost Profile: 3-Year Comparison</div>
-                    <div class="chart-subtitle">Dramatic reductions visible in shoulder and winter months</div>
-                </div>
-            </div>
-            <div class="chart-wrapper">
-                <canvas id="hvacCostProfileChart"></canvas>
-            </div>
-        </div>
     </div>
 
-    <!-- Section: Energy vs Weather -->
-    <div class="section-header">
-        <h2>Energy vs Weather Analysis</h2>
-        <p>Understanding how building efficiency responds to climate conditions</p>
-    </div>
+    <!-- ========================================== -->
+    <!-- TECHNICAL DETAIL TAB -->
+    <!-- ========================================== -->
+    <div id="technical" class="tab-content" style="display: none;">
 
-    <div class="charts-grid">
-        <!-- Energy vs HDD Scatter -->
-        <div class="chart-container">
-            <div class="chart-header">
-                <div>
-                    <div class="chart-title">Energy Usage vs Heating Degree Days</div>
-                    <div class="chart-subtitle">Each point = one month; lower = more efficient</div>
-                </div>
+        <!-- Quick Facts Sidebar -->
+        <div class="quick-facts">
+            <h3>Quick Reference</h3>
+            <div class="quick-fact">
+                <span class="label">Base Load (non-HVAC)</span>
+                <span class="value">8,622 kWh/month</span>
             </div>
-            <div class="chart-wrapper">
-                <canvas id="scatterChart"></canvas>
+            <div class="quick-fact">
+                <span class="label">Heat Pumps Installed</span>
+                <span class="value">Spring 2025</span>
             </div>
-            <div class="chart-note">2025 points cluster lower, showing improved efficiency across all weather conditions</div>
-        </div>
-
-        <!-- Cost Intensity Trend -->
-        <div class="chart-container">
-            <div class="chart-header">
-                <div>
-                    <div class="chart-title">Cost Intensity Trend ($/HDD)</div>
-                    <div class="chart-subtitle">Lower values = better efficiency</div>
-                </div>
+            <div class="quick-fact">
+                <span class="label">2025 Avg $/HDD</span>
+                <span class="value positive">$18.23</span>
             </div>
-            <div class="chart-wrapper">
-                <canvas id="costIntensityChart"></canvas>
+            <div class="quick-fact">
+                <span class="label">2023 Avg $/HDD</span>
+                <span class="value">$30.82</span>
             </div>
-            <div class="chart-note">Heat pumps installed Spring 2025 - note dramatic improvement</div>
-        </div>
-
-        <!-- kWh/HDD Performance -->
-        <div class="chart-container full-width">
-            <div class="chart-header">
-                <div>
-                    <div class="chart-title">Energy Efficiency: kWh per Heating Degree Day</div>
-                    <div class="chart-subtitle">Annual averages - lower is better</div>
-                </div>
-            </div>
-            <div class="chart-wrapper">
-                <canvas id="kwhHddChart"></canvas>
-            </div>
-        </div>
-    </div>
-
-    <!-- Section: HVAC Analysis -->
-    <div class="section-header">
-        <h2>HVAC System Analysis</h2>
-        <p>Detailed breakdown of heating, ventilation, and cooling performance</p>
-    </div>
-
-    <div class="charts-grid">
-        <!-- HVAC Load Breakdown -->
-        <div class="chart-container full-width tall">
-            <div class="chart-header">
-                <div>
-                    <div class="chart-title">Energy Load Breakdown: Base vs HVAC</div>
-                    <div class="chart-subtitle">Stacked comparison showing HVAC reduction in 2025</div>
-                </div>
-            </div>
-            <div class="chart-wrapper">
-                <canvas id="loadBreakdownChart"></canvas>
+            <div class="quick-fact">
+                <span class="label">Best Month $/HDD</span>
+                <span class="value positive">$5.57 (Dec 2025)</span>
             </div>
         </div>
 
-        <!-- Heat Pump Impact -->
-        <div class="chart-container">
-            <div class="chart-header">
-                <div>
-                    <div class="chart-title">Heat Pump Impact: Shoulder Seasons</div>
-                    <div class="chart-subtitle">2024 vs 2025 HVAC costs (Apr-Jun, Sep-Nov)</div>
+        <!-- Cost & Savings Section -->
+        <div class="section-header">
+            <h2>Cost & Savings Analysis</h2>
+            <p>Tracking the financial impact of efficiency improvements</p>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-container expandable" onclick="toggleChartExpand(this)">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Cumulative HVAC Savings (2025)</div>
+                        <div class="chart-subtitle">Monthly progression toward $54K</div>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="cumulativeSavingsChart"></canvas>
                 </div>
             </div>
-            <div class="chart-wrapper">
-                <canvas id="heatPumpImpactChart"></canvas>
+
+            <div class="chart-container expandable" onclick="toggleChartExpand(this)">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Monthly HVAC Savings (2025)</div>
+                        <div class="chart-subtitle">Savings vs 2023 baseline</div>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="monthlySavingsChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container full-width tall expandable" onclick="toggleChartExpand(this)">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Monthly HVAC Cost Profile: 3-Year Comparison</div>
+                        <div class="chart-subtitle">Dramatic reductions visible across all months</div>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="hvacCostProfileChart"></canvas>
+                </div>
             </div>
         </div>
 
-        <!-- HVAC as % of Total -->
-        <div class="chart-container">
-            <div class="chart-header">
-                <div>
-                    <div class="chart-title">HVAC Share of Total Energy</div>
-                    <div class="chart-subtitle">Monthly HVAC percentage by year</div>
+        <!-- Energy vs Weather Section -->
+        <div class="section-header" style="margin-top: var(--space-2xl);">
+            <h2>Energy vs Weather Analysis</h2>
+            <p>Understanding efficiency relative to climate conditions</p>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-container expandable" onclick="toggleChartExpand(this)">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Energy Usage vs HDD</div>
+                        <div class="chart-subtitle">Each point = one month</div>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="scatterChart"></canvas>
+                </div>
+                <div class="chart-note">2025 points cluster lower = better efficiency</div>
+            </div>
+
+            <div class="chart-container expandable" onclick="toggleChartExpand(this)">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Cost Intensity Trend ($/HDD)</div>
+                        <div class="chart-subtitle">Lower values = better efficiency</div>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="costIntensityChart"></canvas>
+                </div>
+                <div class="chart-note">Heat pumps installed Spring 2025</div>
+            </div>
+
+            <div class="chart-container full-width expandable" onclick="toggleChartExpand(this)">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Energy Efficiency: kWh per HDD</div>
+                        <div class="chart-subtitle">Annual averages - lower is better</div>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="kwhHddChart"></canvas>
                 </div>
             </div>
-            <div class="chart-wrapper">
-                <canvas id="hvacShareChart"></canvas>
+        </div>
+
+        <!-- HVAC Analysis Section -->
+        <div class="section-header" style="margin-top: var(--space-2xl);">
+            <h2>HVAC System Analysis</h2>
+            <p>Detailed breakdown of heating system performance</p>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-container full-width tall expandable" onclick="toggleChartExpand(this)">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Energy Load Breakdown: Base vs HVAC</div>
+                        <div class="chart-subtitle">Stacked comparison showing HVAC reduction</div>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="loadBreakdownChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container expandable" onclick="toggleChartExpand(this)">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Heat Pump Impact: Shoulder Seasons</div>
+                        <div class="chart-subtitle">2024 vs 2025 (Apr-Jun, Sep-Nov)</div>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="heatPumpImpactChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container expandable" onclick="toggleChartExpand(this)">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">HVAC Share of Total Energy</div>
+                        <div class="chart-subtitle">Monthly percentage by year</div>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="hvacShareChart"></canvas>
+                </div>
             </div>
         </div>
+
+        <!-- Data Tables -->
+        <div class="section-header" style="margin-top: var(--space-2xl);">
+            <h2>Annual Performance Summary</h2>
+            <p>Key metrics across all years</p>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Total Usage (kWh)</th>
+                        <th>Total Cost</th>
+                        <th>HVAC Cost</th>
+                        <th>Total HDD</th>
+                        <th>Avg $/HDD</th>
+                        <th>Peak Demand (kW)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>2023</strong></td>
+                        <td>433,200</td>
+                        <td>$141,627</td>
+                        <td>$112,783</td>
+                        <td>7,663</td>
+                        <td>$30.82</td>
+                        <td>112.8</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2024</strong></td>
+                        <td>412,600</td>
+                        <td>$135,295</td>
+                        <td>$106,241</td>
+                        <td>7,721</td>
+                        <td>$26.51</td>
+                        <td>94.8</td>
+                    </tr>
+                    <tr class="highlight-row">
+                        <td><strong>2025</strong></td>
+                        <td class="trend-up">283,500</td>
+                        <td class="trend-up">$98,111</td>
+                        <td class="trend-up">$66,765</td>
+                        <td>8,352</td>
+                        <td class="trend-up">$18.23</td>
+                        <td class="trend-up">92.2</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-header" style="margin-top: var(--space-2xl);">
+            <h2>Monthly Detail (2025)</h2>
+            <p>Complete monthly breakdown</p>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Usage (kWh)</th>
+                        <th>HDD</th>
+                        <th>HVAC Cost</th>
+                        <th>Monthly Savings</th>
+                        <th>Cumulative</th>
+                        <th>$/HDD</th>
+                    </tr>
+                </thead>
+                <tbody id="monthlyTableBody">
+                    <!-- Populated by JS -->
+                </tbody>
+            </table>
+        </div>
+
     </div>
 
-    <!-- Annual Performance Table -->
-    <div class="section-header">
-        <h2>Annual Performance Summary</h2>
-        <p>Key metrics comparison across all years</p>
-    </div>
+    <!-- ========================================== -->
+    <!-- COMMUNITY IMPACT TAB -->
+    <!-- ========================================== -->
+    <div id="community" class="tab-content" style="display: none;">
 
-    <div class="table-container">
-        <table id="annualTable">
-            <thead>
-                <tr>
-                    <th>Year</th>
-                    <th>Total Usage (kWh)</th>
-                    <th>Total Cost</th>
-                    <th>HVAC Cost</th>
-                    <th>Total HDD</th>
-                    <th>Avg $/HDD</th>
-                    <th>Peak Demand (kW)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>2023</strong></td>
-                    <td>433,200</td>
-                    <td>$141,627</td>
-                    <td>$112,783</td>
-                    <td>7,663</td>
-                    <td>$30.82</td>
-                    <td>112.8</td>
-                </tr>
-                <tr>
-                    <td><strong>2024</strong></td>
-                    <td>412,600</td>
-                    <td>$135,295</td>
-                    <td>$106,241</td>
-                    <td>7,721</td>
-                    <td>$26.51</td>
-                    <td>94.8</td>
-                </tr>
-                <tr class="highlight-row">
-                    <td><strong>2025</strong></td>
-                    <td class="trend-up">283,500</td>
-                    <td class="trend-up">$98,111</td>
-                    <td class="trend-up">$66,765</td>
-                    <td>8,352</td>
-                    <td class="trend-up">$18.23</td>
-                    <td class="trend-up">92.2</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <!-- Impact Story -->
+        <div class="impact-story">
+            <h3>Investing in Our Future</h3>
+            <p>Dá Kų, meaning "Our House" in Southern Tutchone, is the heart of our community. It's where the Dakwäkäda Dancers have performed for over 20 years, where youth learn their language, and where elders share knowledge with new generations.</p>
+            <p>Every dollar saved on energy is a dollar we can invest in our people. In 2025, our building efficiency improvements saved <strong>$54,437</strong>—resources that support cultural programming, language preservation, and community gatherings.</p>
 
-    <!-- Monthly Detail Table -->
-    <div class="section-header" style="margin-top: 40px;">
-        <h2>Monthly Savings Detail (2025)</h2>
-        <p>Complete breakdown of monthly performance and savings</p>
-    </div>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <h4>Cultural Programming</h4>
+                    <div class="value">725+ Hours</div>
+                    <p>Potential additional programming funded by savings</p>
+                </div>
+                <div class="impact-card">
+                    <h4>Language Learners</h4>
+                    <div class="value">200+</div>
+                    <p>Materials and resources that could be supported</p>
+                </div>
+                <div class="impact-card">
+                    <h4>Environmental Leadership</h4>
+                    <div class="value">70 Tons</div>
+                    <p>CO2 emissions avoided annually</p>
+                </div>
+                <div class="impact-card">
+                    <h4>Future Savings</h4>
+                    <div class="value">$330K+</div>
+                    <p>Projected 5-year cumulative savings</p>
+                </div>
+            </div>
+        </div>
 
-    <div class="table-container">
-        <table id="monthlyTable">
-            <thead>
-                <tr>
-                    <th>Month</th>
-                    <th>Usage (kWh)</th>
-                    <th>HDD</th>
-                    <th>HVAC Cost</th>
-                    <th>Monthly Savings</th>
-                    <th>Cumulative Savings</th>
-                    <th>$/HDD</th>
-                </tr>
-            </thead>
-            <tbody id="monthlyTableBody">
-                <!-- Populated by JS -->
-            </tbody>
-        </table>
+        <!-- Environmental Impact for Community -->
+        <div class="section-header">
+            <h2>Environmental Stewardship</h2>
+            <p>Honoring our ancestors' care for the land</p>
+        </div>
+
+        <div id="communityEnvEquivalents"></div>
+
+        <!-- Community-focused charts -->
+        <div class="section-header" style="margin-top: var(--space-2xl);">
+            <h2>Our Progress</h2>
+            <p>Seeing our achievements over time</p>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-container expandable" onclick="toggleChartExpand(this)">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Growing Savings</div>
+                        <div class="chart-subtitle">Each month adds to our success</div>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="communitySavingsChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container expandable" onclick="toggleChartExpand(this)">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Year-Over-Year Improvement</div>
+                        <div class="chart-subtitle">Costs decreasing each year</div>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="communityComparisonChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Future Outlook -->
+        <div class="section-header" style="margin-top: var(--space-2xl);">
+            <h2>Looking Ahead</h2>
+            <p>Projected benefits for our community</p>
+        </div>
+
+        <div id="communityProjections"></div>
+
+        <!-- Community Message -->
+        <div class="impact-story" style="margin-top: var(--space-2xl);">
+            <h3>Leading by Example</h3>
+            <p>CAFN's investment in building efficiency demonstrates responsible stewardship and forward-thinking governance. Our success shows other First Nations communities what's possible with strategic investment in sustainable infrastructure.</p>
+            <p>As we continue this journey, we honor our ancestors who cared for this land for over 8,000 years, while building a sustainable future for the next seven generations.</p>
+        </div>
+
     </div>
 
 </div>
@@ -604,624 +638,505 @@
     <p style="margin-top: 8px;">Data Source: DaKu_PowerUseMod v2.3 | Generated January 2026</p>
 </footer>
 
+<!-- JavaScript -->
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/config.js"></script>
+
 <script>
 // ==========================================
-// DATA
+// TAB NAVIGATION
 // ==========================================
 
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+function switchTab(tabId) {
+    // Update buttons
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tab === tabId);
+    });
 
-const data = {
-    usage: {
-        2023: [35200, 32800, 39800, 32600, 30600, 35000, 43200, 38400, 38400, 34000, 38000, 35200],
-        2024: [33000, 42200, 33200, 25400, 37000, 30400, 32600, 34000, 38400, 32400, 38600, 35400],
-        2025: [27600, 27200, 24800, 20200, 25000, 26700, 25300, 25900, 21900, 18700, 16800, 23400]
-    },
-    hdd: {
-        2023: [1115.7, 1298.4, 1182.1, 856.9, 534.2, 245.6, 108.9, 112.7, 240.4, 412.5, 610.2, 945.8],
-        2024: [1095.3, 1245.2, 1125.6, 798.4, 562.1, 294.5, 138.9, 165.2, 225.8, 445.6, 642.1, 982.4],
-        2025: [1088.9, 1221.4, 1142.8, 812.3, 556.2, 288.7, 142.1, 185.2, 316.4, 473.5, 674.3, 1450.0]
-    },
-    hvacCost: {
-        2023: [9096, 8427, 10379, 8372, 7830, 9246, 11653, 10315, 9988, 8675, 9790, 9010],
-        2024: [8461, 11045, 8536, 6152, 9595, 7755, 8368, 8800, 10027, 8313, 10041, 9149],
-        2025: [6908, 6697, 5872, 4511, 5940, 6573, 6092, 6250, 4986, 4092, 3504, 5341]
-    },
-    totalCost: {
-        2023: [11500, 10831, 12782, 10775, 10234, 11649, 14057, 12719, 12392, 11079, 12194, 11414],
-        2024: [10864, 13448, 10939, 8765, 11999, 10159, 10772, 11204, 12431, 10716, 12445, 11553],
-        2025: [9378, 9193, 8524, 7242, 8580, 9102, 8711, 8831, 7715, 6739, 6028, 8070]
-    },
-    costIntensity: {
-        2023: [10.31, 8.34, 10.81, 12.57, 19.16, 47.03, 84.12, 71.41, 47.21, 26.81, 19.98, 12.07],
-        2024: [9.92, 10.80, 9.72, 10.98, 21.35, 34.49, 61.73, 52.50, 51.54, 24.98, 19.38, 11.76],
-        2025: [8.61, 7.53, 7.46, 8.91, 15.43, 31.53, 48.24, 38.85, 23.44, 14.23, 8.94, 5.57]
-    },
-    hvacSavings: [1737, 2684, 3478, 2586, 2883, 2616, 4536, 5019, 8120, 5282, 7178, 8318],
-    cumulativeSavings: [1737, 4420, 7899, 10485, 13368, 15984, 20520, 25540, 33660, 38942, 46119, 54437],
-    baseLoad: 8622
-};
+    // Update content
+    document.querySelectorAll('.tab-content').forEach(content => {
+        content.style.display = content.id === tabId ? 'block' : 'none';
+    });
 
-// HVAC usage (total - base)
-data.hvacUsage = {
-    2023: data.usage[2023].map(u => u - data.baseLoad),
-    2024: data.usage[2024].map(u => u - data.baseLoad),
-    2025: data.usage[2025].map(u => u - data.baseLoad)
-};
+    // Initialize charts for the tab if needed
+    if (tabId === 'executive' && !window.execChartsInitialized) {
+        initExecutiveCharts();
+        window.execChartsInitialized = true;
+    }
+    if (tabId === 'technical' && !window.techChartsInitialized) {
+        initTechnicalCharts();
+        window.techChartsInitialized = true;
+    }
+    if (tabId === 'community' && !window.communityChartsInitialized) {
+        initCommunityCharts();
+        window.communityChartsInitialized = true;
+    }
+
+    // Resize charts after tab switch
+    setTimeout(() => {
+        Object.values(Chart.instances || {}).forEach(chart => {
+            if (chart) chart.resize();
+        });
+    }, 100);
+}
 
 // ==========================================
-// CHART CONFIGURATION
+// CHART EXPAND/COLLAPSE
+// ==========================================
+
+let expandedChart = null;
+
+function toggleChartExpand(container) {
+    const overlay = document.getElementById('chartOverlay');
+
+    if (container.classList.contains('expanded')) {
+        // Close
+        container.classList.remove('expanded');
+        overlay.classList.remove('visible');
+        expandedChart = null;
+    } else {
+        // Close any other expanded chart first
+        if (expandedChart) {
+            expandedChart.classList.remove('expanded');
+        }
+        // Open this one
+        container.classList.add('expanded');
+        overlay.classList.add('visible');
+        expandedChart = container;
+    }
+
+    // Resize the chart
+    setTimeout(() => {
+        const canvas = container.querySelector('canvas');
+        if (canvas && Chart.getChart(canvas)) {
+            Chart.getChart(canvas).resize();
+        }
+    }, 100);
+}
+
+function closeExpandedChart() {
+    if (expandedChart) {
+        expandedChart.classList.remove('expanded');
+        document.getElementById('chartOverlay').classList.remove('visible');
+        expandedChart = null;
+    }
+}
+
+// ==========================================
+// CHART INITIALIZATION
 // ==========================================
 
 Chart.register(ChartDataLabels);
 Chart.defaults.font.family = "'Segoe UI', 'Helvetica', 'Arial', sans-serif";
 Chart.defaults.color = '#666';
 
-const colors = {
-    2023: { bg: 'rgba(149, 165, 166, 0.6)', border: '#95a5a6' },
-    2024: { bg: 'rgba(52, 152, 219, 0.6)', border: '#3498db' },
-    2025: { bg: 'rgba(46, 125, 50, 0.8)', border: '#2e7d32' },
-    savings: { bg: 'rgba(46, 125, 50, 0.3)', border: '#2e7d32' },
-    accent: { bg: 'rgba(238, 155, 0, 0.7)', border: '#ee9b00' },
-    hvac: { bg: 'rgba(197, 10, 39, 0.7)', border: '#c50a27' }
-};
+const colors = DakuCharts.colors;
 
-// ==========================================
-// CHART 1: Cumulative Savings (Area)
-// ==========================================
-new Chart(document.getElementById('cumulativeSavingsChart'), {
-    type: 'line',
-    data: {
-        labels: months,
-        datasets: [{
-            label: 'Cumulative Savings',
-            data: data.cumulativeSavings,
-            borderColor: colors.savings.border,
-            backgroundColor: colors.savings.bg,
-            fill: true,
-            tension: 0.4,
-            pointRadius: 5,
-            pointBackgroundColor: colors.savings.border,
-            datalabels: { display: false }
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: { display: false },
-            tooltip: {
-                callbacks: {
-                    label: ctx => '$' + ctx.parsed.y.toLocaleString()
+// Executive Tab Charts
+function initExecutiveCharts() {
+    // Environmental Equivalents
+    const execEnv = document.getElementById('execEnvEquivalents');
+    if (execEnv) {
+        DakuComponents.createEnvironmentalEquivalents(execEnv, DakuData.environmental);
+    }
+
+    // Cumulative Savings
+    DakuCharts.createCumulativeSavings('execCumulativeChart', DakuData);
+
+    // Annual Comparison
+    DakuCharts.createAnnualComparison('execAnnualChart', DakuData);
+
+    // Projections
+    const projContainer = document.getElementById('execProjections');
+    if (projContainer) {
+        DakuComponents.createProjections(projContainer, DakuData);
+    }
+}
+
+// Technical Tab Charts
+function initTechnicalCharts() {
+    // Cumulative Savings
+    new Chart(document.getElementById('cumulativeSavingsChart'), {
+        type: 'line',
+        data: {
+            labels: DakuData.months,
+            datasets: [{
+                label: 'Cumulative Savings',
+                data: DakuData.savings.hvacCumulative,
+                borderColor: colors.savings.border,
+                backgroundColor: colors.savings.bg,
+                fill: true,
+                tension: 0.4,
+                pointRadius: 5,
+                pointBackgroundColor: colors.savings.border
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                datalabels: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => '$' + ctx.parsed.y.toLocaleString()
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { callback: v => '$' + (v/1000) + 'k' }
                 }
             }
+        }
+    });
+
+    // Monthly Savings
+    new Chart(document.getElementById('monthlySavingsChart'), {
+        type: 'bar',
+        data: {
+            labels: DakuData.months,
+            datasets: [{
+                label: 'Monthly Savings',
+                data: DakuData.savings.hvacMonthly,
+                backgroundColor: colors.savings.border,
+                borderRadius: 4
+            }]
         },
-        scales: {
-            y: {
-                beginAtZero: true,
-                ticks: { callback: v => '$' + (v/1000) + 'k' },
-                title: { display: true, text: 'Cumulative Savings ($)' }
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                datalabels: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { callback: v => '$' + (v/1000) + 'k' }
+                }
             }
         }
-    }
-});
+    });
 
-// ==========================================
-// CHART 2: Monthly Savings Bar
-// ==========================================
-new Chart(document.getElementById('monthlySavingsChart'), {
-    type: 'bar',
-    data: {
-        labels: months,
-        datasets: [{
-            label: 'Monthly Savings',
-            data: data.hvacSavings,
-            backgroundColor: colors.savings.border,
-            borderRadius: 4,
-            datalabels: { display: false }
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: {
-            y: {
-                beginAtZero: true,
-                ticks: { callback: v => '$' + (v/1000) + 'k' },
-                title: { display: true, text: 'Savings ($)' }
+    // HVAC Cost Profile
+    new Chart(document.getElementById('hvacCostProfileChart'), {
+        type: 'bar',
+        data: {
+            labels: DakuData.months,
+            datasets: [
+                {
+                    label: '2023',
+                    data: DakuData.electricity.hvacCost[2023],
+                    backgroundColor: colors.year2023.bg
+                },
+                {
+                    label: '2024',
+                    data: DakuData.electricity.hvacCost[2024],
+                    backgroundColor: colors.year2024.bg
+                },
+                {
+                    label: '2025',
+                    data: DakuData.electricity.hvacCost[2025],
+                    backgroundColor: colors.year2025.bg
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'top' },
+                datalabels: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { callback: v => '$' + (v/1000) + 'k' }
+                }
             }
         }
-    }
-});
+    });
 
-// ==========================================
-// CHART 3: Annual Cost Comparison
-// ==========================================
-new Chart(document.getElementById('annualCostChart'), {
-    type: 'bar',
-    data: {
-        labels: ['2023', '2024', '2025'],
-        datasets: [
-            {
-                label: 'Total Building Cost',
-                data: [141627, 135295, 98111],
-                backgroundColor: colors[2023].bg,
-                borderColor: colors[2023].border,
-                borderWidth: 1,
+    // Scatter Plot
+    DakuCharts.createScatterPlot('scatterChart', DakuData);
+
+    // Cost Intensity
+    DakuCharts.createCostIntensityTrend('costIntensityChart', DakuData);
+
+    // kWh per HDD
+    const avgKwhHdd = {
+        2023: DakuData.getKwhPerHdd(2023),
+        2024: DakuData.getKwhPerHdd(2024),
+        2025: DakuData.getKwhPerHdd(2025)
+    };
+
+    new Chart(document.getElementById('kwhHddChart'), {
+        type: 'bar',
+        data: {
+            labels: ['2023', '2024', '2025'],
+            datasets: [{
+                label: 'kWh per HDD',
+                data: [avgKwhHdd[2023], avgKwhHdd[2024], avgKwhHdd[2025]],
+                backgroundColor: [colors.year2023.bg, colors.year2024.bg, colors.year2025.bg],
+                borderColor: [colors.year2023.border, colors.year2024.border, colors.year2025.border],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                datalabels: {
+                    anchor: 'end',
+                    align: 'top',
+                    formatter: v => v.toFixed(1) + ' kWh/HDD',
+                    font: { weight: 'bold' }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: { display: true, text: 'kWh per HDD' }
+                }
+            }
+        }
+    });
+
+    // Load Breakdown
+    DakuCharts.createLoadBreakdown('loadBreakdownChart', DakuData);
+
+    // Heat Pump Impact
+    const shoulderMonths = ['Apr', 'May', 'Jun', 'Sep', 'Oct', 'Nov'];
+    const shoulderIndices = [3, 4, 5, 8, 9, 10];
+
+    new Chart(document.getElementById('heatPumpImpactChart'), {
+        type: 'bar',
+        data: {
+            labels: shoulderMonths,
+            datasets: [
+                {
+                    label: '2024',
+                    data: shoulderIndices.map(i => DakuData.electricity.hvacCost[2024][i]),
+                    backgroundColor: colors.year2024.bg
+                },
+                {
+                    label: '2025 (Heat Pumps)',
+                    data: shoulderIndices.map(i => DakuData.electricity.hvacCost[2025][i]),
+                    backgroundColor: colors.year2025.bg
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'top' },
+                datalabels: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { callback: v => '$' + (v/1000) + 'k' }
+                }
+            }
+        }
+    });
+
+    // HVAC Share
+    const hvacShare = {
+        2023: DakuData.getHvacUsage(2023).map((h, i) => (h / DakuData.electricity.usage[2023][i]) * 100),
+        2024: DakuData.getHvacUsage(2024).map((h, i) => (h / DakuData.electricity.usage[2024][i]) * 100),
+        2025: DakuData.getHvacUsage(2025).map((h, i) => (h / DakuData.electricity.usage[2025][i]) * 100)
+    };
+
+    new Chart(document.getElementById('hvacShareChart'), {
+        type: 'line',
+        data: {
+            labels: DakuData.months,
+            datasets: [
+                {
+                    label: '2023',
+                    data: hvacShare[2023],
+                    borderColor: colors.year2023.border,
+                    borderWidth: 2,
+                    tension: 0.3,
+                    pointRadius: 3
+                },
+                {
+                    label: '2024',
+                    data: hvacShare[2024],
+                    borderColor: colors.year2024.border,
+                    borderWidth: 2,
+                    tension: 0.3,
+                    pointRadius: 3
+                },
+                {
+                    label: '2025',
+                    data: hvacShare[2025],
+                    borderColor: colors.year2025.border,
+                    borderWidth: 3,
+                    tension: 0.3,
+                    pointRadius: 4
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'top' },
+                datalabels: { display: false }
+            },
+            scales: {
+                y: {
+                    min: 0,
+                    max: 100,
+                    ticks: { callback: v => v + '%' }
+                }
+            }
+        }
+    });
+
+    // Populate monthly table
+    const tableBody = document.getElementById('monthlyTableBody');
+    DakuData.months.forEach((month, i) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td><strong>${month}</strong></td>
+            <td>${DakuData.electricity.usage[2025][i].toLocaleString()}</td>
+            <td>${DakuData.electricity.hdd[2025][i].toLocaleString()}</td>
+            <td>$${DakuData.electricity.hvacCost[2025][i].toLocaleString()}</td>
+            <td class="trend-up">$${DakuData.savings.hvacMonthly[i].toLocaleString()}</td>
+            <td class="trend-up">$${DakuData.savings.hvacCumulative[i].toLocaleString()}</td>
+            <td>$${DakuData.electricity.costIntensity[2025][i].toFixed(2)}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+// Community Tab Charts
+function initCommunityCharts() {
+    // Environmental Equivalents
+    const commEnv = document.getElementById('communityEnvEquivalents');
+    if (commEnv) {
+        DakuComponents.createEnvironmentalEquivalents(commEnv, DakuData.environmental);
+    }
+
+    // Community Savings Chart (simpler)
+    new Chart(document.getElementById('communitySavingsChart'), {
+        type: 'line',
+        data: {
+            labels: DakuData.months,
+            datasets: [{
+                label: 'Total Savings',
+                data: DakuData.savings.hvacCumulative,
+                borderColor: colors.success,
+                backgroundColor: 'rgba(46, 125, 50, 0.2)',
+                fill: true,
+                tension: 0.4,
+                pointRadius: 6,
+                pointBackgroundColor: colors.success
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                datalabels: {
+                    display: (ctx) => ctx.dataIndex === 11, // Only show last
+                    anchor: 'end',
+                    align: 'top',
+                    formatter: v => '$' + Math.round(v/1000) + 'k',
+                    font: { weight: 'bold', size: 14 },
+                    color: colors.success
+                },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => '$' + ctx.parsed.y.toLocaleString() + ' saved so far'
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { callback: v => '$' + (v/1000) + 'k' },
+                    title: { display: true, text: 'Savings ($)' }
+                }
+            }
+        }
+    });
+
+    // Community Comparison (simple)
+    new Chart(document.getElementById('communityComparisonChart'), {
+        type: 'bar',
+        data: {
+            labels: ['2023', '2024', '2025'],
+            datasets: [{
+                label: 'HVAC Cost',
+                data: [
+                    DakuData.kpis[2023].hvacCost,
+                    DakuData.kpis[2024].hvacCost,
+                    DakuData.kpis[2025].hvacCost
+                ],
+                backgroundColor: [colors.year2023.bg, colors.year2024.bg, colors.year2025.bg],
+                borderColor: [colors.year2023.border, colors.year2024.border, colors.year2025.border],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
                 datalabels: {
                     anchor: 'end',
                     align: 'top',
                     formatter: v => '$' + Math.round(v/1000) + 'k',
                     font: { weight: 'bold' }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => 'HVAC Cost: $' + ctx.parsed.y.toLocaleString()
+                    }
                 }
             },
-            {
-                label: 'HVAC Cost',
-                data: [112783, 106241, 66765],
-                backgroundColor: colors.hvac.bg,
-                borderColor: colors.hvac.border,
-                borderWidth: 1,
-                datalabels: {
-                    anchor: 'end',
-                    align: 'top',
-                    formatter: v => '$' + Math.round(v/1000) + 'k',
-                    font: { weight: 'bold' },
-                    color: colors.hvac.border
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { callback: v => '$' + (v/1000) + 'k' },
+                    title: { display: true, text: 'Annual HVAC Cost ($)' }
                 }
             }
-        ]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: { position: 'top' },
-            tooltip: {
-                callbacks: { label: ctx => ctx.dataset.label + ': $' + ctx.parsed.y.toLocaleString() }
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                ticks: { callback: v => '$' + (v/1000) + 'k' },
-                title: { display: true, text: 'Annual Cost ($)' }
-            }
         }
+    });
+
+    // Community Projections
+    const projContainer = document.getElementById('communityProjections');
+    if (projContainer) {
+        DakuComponents.createProjections(projContainer, DakuData);
+    }
+}
+
+// ==========================================
+// INITIALIZATION
+// ==========================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize executive tab charts (default tab)
+    initExecutiveCharts();
+    window.execChartsInitialized = true;
+
+    // Initialize tooltips
+    if (typeof DakuComponents !== 'undefined') {
+        DakuComponents.initTooltips();
     }
 });
-
-// ==========================================
-// CHART 4: Monthly HVAC Cost Profile
-// ==========================================
-new Chart(document.getElementById('hvacCostProfileChart'), {
-    type: 'bar',
-    data: {
-        labels: months,
-        datasets: [
-            {
-                label: '2023',
-                data: data.hvacCost[2023],
-                backgroundColor: colors[2023].bg,
-                datalabels: { display: false }
-            },
-            {
-                label: '2024',
-                data: data.hvacCost[2024],
-                backgroundColor: colors[2024].bg,
-                datalabels: { display: false }
-            },
-            {
-                label: '2025',
-                data: data.hvacCost[2025],
-                backgroundColor: colors[2025].bg,
-                datalabels: {
-                    anchor: 'end',
-                    align: 'top',
-                    color: colors[2025].border,
-                    font: { weight: 'bold', size: 10 },
-                    formatter: v => '$' + Math.round(v/1000) + 'k'
-                }
-            }
-        ]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: { position: 'top' },
-            tooltip: {
-                callbacks: { label: ctx => ctx.dataset.label + ': $' + ctx.parsed.y.toLocaleString() }
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                ticks: { callback: v => '$' + (v/1000) + 'k' },
-                title: { display: true, text: 'Monthly HVAC Cost ($)' }
-            }
-        }
-    }
-});
-
-// ==========================================
-// CHART 5: Scatter - Energy vs HDD
-// ==========================================
-const scatterData = [];
-[2023, 2024, 2025].forEach(year => {
-    for (let i = 0; i < 12; i++) {
-        scatterData.push({
-            x: data.hdd[year][i],
-            y: data.usage[year][i],
-            year: year
-        });
-    }
-});
-
-new Chart(document.getElementById('scatterChart'), {
-    type: 'scatter',
-    data: {
-        datasets: [
-            {
-                label: '2023',
-                data: scatterData.filter(d => d.year === 2023),
-                backgroundColor: colors[2023].bg,
-                borderColor: colors[2023].border,
-                pointRadius: 8,
-                datalabels: { display: false }
-            },
-            {
-                label: '2024',
-                data: scatterData.filter(d => d.year === 2024),
-                backgroundColor: colors[2024].bg,
-                borderColor: colors[2024].border,
-                pointRadius: 8,
-                datalabels: { display: false }
-            },
-            {
-                label: '2025',
-                data: scatterData.filter(d => d.year === 2025),
-                backgroundColor: colors[2025].bg,
-                borderColor: colors[2025].border,
-                pointRadius: 8,
-                datalabels: { display: false }
-            }
-        ]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: { position: 'top' },
-            tooltip: {
-                callbacks: {
-                    label: ctx => `HDD: ${ctx.parsed.x}, Usage: ${ctx.parsed.y.toLocaleString()} kWh`
-                }
-            }
-        },
-        scales: {
-            x: { title: { display: true, text: 'Heating Degree Days (HDD)' } },
-            y: {
-                title: { display: true, text: 'Energy Usage (kWh)' },
-                ticks: { callback: v => (v/1000) + 'k' }
-            }
-        }
-    }
-});
-
-// ==========================================
-// CHART 6: Cost Intensity Line
-// ==========================================
-new Chart(document.getElementById('costIntensityChart'), {
-    type: 'line',
-    data: {
-        labels: months,
-        datasets: [
-            {
-                label: '2023',
-                data: data.costIntensity[2023],
-                borderColor: colors[2023].border,
-                borderDash: [5, 5],
-                borderWidth: 2,
-                tension: 0.3,
-                pointRadius: 0,
-                datalabels: { display: false }
-            },
-            {
-                label: '2024',
-                data: data.costIntensity[2024],
-                borderColor: colors[2024].border,
-                borderDash: [2, 2],
-                borderWidth: 2,
-                tension: 0.3,
-                pointRadius: 0,
-                datalabels: { display: false }
-            },
-            {
-                label: '2025',
-                data: data.costIntensity[2025],
-                borderColor: colors[2025].border,
-                backgroundColor: 'rgba(46, 125, 50, 0.1)',
-                borderWidth: 3,
-                fill: true,
-                tension: 0.3,
-                datalabels: { display: false }
-            }
-        ]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: { position: 'top' },
-            tooltip: {
-                callbacks: { label: ctx => ctx.dataset.label + ': $' + ctx.parsed.y.toFixed(2) + '/HDD' }
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                title: { display: true, text: '$/HDD (lower is better)' }
-            }
-        }
-    }
-});
-
-// ==========================================
-// CHART 7: kWh/HDD Annual Average
-// ==========================================
-const avgKwhHdd = {
-    2023: data.usage[2023].reduce((a,b) => a+b) / data.hdd[2023].reduce((a,b) => a+b),
-    2024: data.usage[2024].reduce((a,b) => a+b) / data.hdd[2024].reduce((a,b) => a+b),
-    2025: data.usage[2025].reduce((a,b) => a+b) / data.hdd[2025].reduce((a,b) => a+b)
-};
-
-new Chart(document.getElementById('kwhHddChart'), {
-    type: 'bar',
-    data: {
-        labels: ['2023', '2024', '2025'],
-        datasets: [{
-            label: 'kWh per HDD',
-            data: [avgKwhHdd[2023], avgKwhHdd[2024], avgKwhHdd[2025]],
-            backgroundColor: [colors[2023].bg, colors[2024].bg, colors[2025].bg],
-            borderColor: [colors[2023].border, colors[2024].border, colors[2025].border],
-            borderWidth: 2,
-            datalabels: {
-                anchor: 'end',
-                align: 'top',
-                formatter: v => v.toFixed(1) + ' kWh/HDD',
-                font: { weight: 'bold' }
-            }
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: {
-            y: {
-                beginAtZero: true,
-                title: { display: true, text: 'kWh per Heating Degree Day' }
-            }
-        }
-    }
-});
-
-// ==========================================
-// CHART 8: Load Breakdown (Stacked)
-// ==========================================
-new Chart(document.getElementById('loadBreakdownChart'), {
-    type: 'bar',
-    data: {
-        labels: months,
-        datasets: [
-            {
-                label: '2023 Base',
-                data: Array(12).fill(data.baseLoad),
-                backgroundColor: 'rgba(149, 165, 166, 0.4)',
-                stack: '2023',
-                datalabels: { display: false }
-            },
-            {
-                label: '2023 HVAC',
-                data: data.hvacUsage[2023],
-                backgroundColor: colors[2023].bg,
-                stack: '2023',
-                datalabels: { display: false }
-            },
-            {
-                label: '2024 Base',
-                data: Array(12).fill(data.baseLoad),
-                backgroundColor: 'rgba(52, 152, 219, 0.3)',
-                stack: '2024',
-                datalabels: { display: false }
-            },
-            {
-                label: '2024 HVAC',
-                data: data.hvacUsage[2024],
-                backgroundColor: colors[2024].bg,
-                stack: '2024',
-                datalabels: { display: false }
-            },
-            {
-                label: '2025 Base',
-                data: Array(12).fill(data.baseLoad),
-                backgroundColor: 'rgba(46, 125, 50, 0.3)',
-                stack: '2025',
-                datalabels: { display: false }
-            },
-            {
-                label: '2025 HVAC',
-                data: data.hvacUsage[2025],
-                backgroundColor: colors[2025].bg,
-                stack: '2025',
-                datalabels: {
-                    anchor: 'end',
-                    align: 'end',
-                    color: colors[2025].border,
-                    font: { size: 9, weight: 'bold' },
-                    formatter: (v, ctx) => Math.round((v + data.baseLoad)/1000) + 'k'
-                }
-            }
-        ]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                position: 'top',
-                labels: {
-                    filter: item => !item.text.includes('Base')
-                }
-            }
-        },
-        scales: {
-            x: { stacked: true },
-            y: {
-                stacked: true,
-                title: { display: true, text: 'Energy (kWh)' },
-                ticks: { callback: v => (v/1000) + 'k' }
-            }
-        }
-    }
-});
-
-// ==========================================
-// CHART 9: Heat Pump Impact (Shoulder Seasons)
-// ==========================================
-const shoulderMonths = ['Apr', 'May', 'Jun', 'Sep', 'Oct', 'Nov'];
-const shoulderIndices = [3, 4, 5, 8, 9, 10];
-
-new Chart(document.getElementById('heatPumpImpactChart'), {
-    type: 'bar',
-    data: {
-        labels: shoulderMonths,
-        datasets: [
-            {
-                label: '2024',
-                data: shoulderIndices.map(i => data.hvacCost[2024][i]),
-                backgroundColor: colors[2024].bg,
-                borderColor: colors[2024].border,
-                borderWidth: 1,
-                datalabels: { display: false }
-            },
-            {
-                label: '2025 (Heat Pumps)',
-                data: shoulderIndices.map(i => data.hvacCost[2025][i]),
-                backgroundColor: colors[2025].bg,
-                borderColor: colors[2025].border,
-                borderWidth: 1,
-                datalabels: {
-                    anchor: 'end',
-                    align: 'top',
-                    color: colors[2025].border,
-                    font: { weight: 'bold', size: 10 },
-                    formatter: v => '$' + Math.round(v/1000) + 'k'
-                }
-            }
-        ]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: { position: 'top' },
-            tooltip: {
-                callbacks: { label: ctx => ctx.dataset.label + ': $' + ctx.parsed.y.toLocaleString() }
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                ticks: { callback: v => '$' + (v/1000) + 'k' },
-                title: { display: true, text: 'HVAC Cost ($)' }
-            }
-        }
-    }
-});
-
-// ==========================================
-// CHART 10: HVAC Share %
-// ==========================================
-const hvacShare = {
-    2023: data.hvacUsage[2023].map((h, i) => (h / data.usage[2023][i]) * 100),
-    2024: data.hvacUsage[2024].map((h, i) => (h / data.usage[2024][i]) * 100),
-    2025: data.hvacUsage[2025].map((h, i) => (h / data.usage[2025][i]) * 100)
-};
-
-new Chart(document.getElementById('hvacShareChart'), {
-    type: 'line',
-    data: {
-        labels: months,
-        datasets: [
-            {
-                label: '2023',
-                data: hvacShare[2023],
-                borderColor: colors[2023].border,
-                borderWidth: 2,
-                tension: 0.3,
-                pointRadius: 3,
-                datalabels: { display: false }
-            },
-            {
-                label: '2024',
-                data: hvacShare[2024],
-                borderColor: colors[2024].border,
-                borderWidth: 2,
-                tension: 0.3,
-                pointRadius: 3,
-                datalabels: { display: false }
-            },
-            {
-                label: '2025',
-                data: hvacShare[2025],
-                borderColor: colors[2025].border,
-                borderWidth: 3,
-                tension: 0.3,
-                pointRadius: 4,
-                datalabels: { display: false }
-            }
-        ]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: { position: 'top' },
-            tooltip: {
-                callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + '%' }
-            }
-        },
-        scales: {
-            y: {
-                min: 0,
-                max: 100,
-                title: { display: true, text: 'HVAC % of Total Usage' },
-                ticks: { callback: v => v + '%' }
-            }
-        }
-    }
-});
-
-// ==========================================
-// POPULATE MONTHLY TABLE
-// ==========================================
-const tableBody = document.getElementById('monthlyTableBody');
-months.forEach((month, i) => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-        <td><strong>${month}</strong></td>
-        <td>${data.usage[2025][i].toLocaleString()}</td>
-        <td>${data.hdd[2025][i].toLocaleString()}</td>
-        <td>$${data.hvacCost[2025][i].toLocaleString()}</td>
-        <td class="trend-up">$${data.hvacSavings[i].toLocaleString()}</td>
-        <td class="trend-up">$${data.cumulativeSavings[i].toLocaleString()}</td>
-        <td>$${data.costIntensity[2025][i].toFixed(2)}</td>
-    `;
-    tableBody.appendChild(row);
-});
-
 </script>
 
 </body>

@@ -4,28 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dá Kų Cultural Centre - Building Efficiency</title>
+    <link rel="stylesheet" href="css/styles.css">
     <style>
-        :root {
-            --cafn-dark: #1a1a2e;
-            --cafn-white: #ffffff;
-            --cafn-red: #c50a27;
-            --cafn-gray: #f4f6f7;
-            --cafn-text: #2c3e50;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--cafn-dark);
-            color: var(--cafn-white);
-            line-height: 1.6;
-        }
-
         /* Hero Section */
         .hero {
             position: relative;
@@ -36,6 +16,7 @@
             align-items: center;
             text-align: center;
             padding: 40px 20px;
+            background: var(--cafn-dark);
         }
 
         .hero::before {
@@ -46,14 +27,14 @@
             right: 0;
             bottom: 0;
             background: url('daku.jpg') center center / cover no-repeat;
-            opacity: 0.3;
+            opacity: 0.25;
             z-index: 0;
         }
 
         .hero-content {
             position: relative;
             z-index: 1;
-            max-width: 800px;
+            max-width: 900px;
         }
 
         .hero-logo {
@@ -63,10 +44,18 @@
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            color: var(--cafn-white);
+            margin-bottom: 10px;
             letter-spacing: 1px;
+        }
+
+        .hero .translation {
+            font-size: 1.3rem;
+            color: var(--cafn-red);
+            font-style: italic;
+            margin-bottom: 20px;
         }
 
         .hero .subtitle {
@@ -109,65 +98,69 @@
             60% { transform: translateX(-50%) translateY(-5px); }
         }
 
-        /* Stats Section */
-        .stats-section {
-            background: var(--cafn-gray);
-            padding: 80px 20px;
+        /* Highlight Banner */
+        .highlight-banner {
+            background: linear-gradient(135deg, var(--success) 0%, #1b5e20 100%);
+            color: white;
+            padding: var(--space-2xl) var(--space-lg);
+            text-align: center;
         }
 
-        .container {
-            max-width: 1200px;
+        .highlight-banner h2 {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--space-sm);
+        }
+
+        .highlight-banner p {
+            font-size: var(--font-size-lg);
+            opacity: 0.9;
+            max-width: 700px;
             margin: 0 auto;
         }
 
-        .section-title {
-            text-align: center;
-            color: var(--cafn-dark);
-            font-size: 2rem;
-            margin-bottom: 50px;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: var(--cafn-red);
-            margin: 15px auto 0;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+        /* Stats Section with Expandable Cards */
+        .stats-section {
+            background: var(--gray-200);
+            padding: var(--space-3xl) var(--space-lg);
         }
 
         .stat-card {
             background: var(--cafn-white);
-            padding: 35px 25px;
-            border-radius: 12px;
+            padding: 30px 25px;
+            border-radius: var(--radius-lg);
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--shadow-md);
             border-top: 4px solid var(--cafn-red);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
         }
 
         .stat-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-card.expanded {
+            border-top-color: var(--success);
         }
 
         .stat-value {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 700;
             color: var(--cafn-dark);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            transition: color var(--transition-fast);
+        }
+
+        .stat-card:hover .stat-value {
+            color: var(--cafn-red);
         }
 
         .stat-label {
             font-size: 0.95rem;
-            color: #666;
+            color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 8px;
@@ -175,113 +168,173 @@
 
         .stat-detail {
             font-size: 0.85rem;
-            color: #888;
+            color: var(--text-muted);
+        }
+
+        .stat-expanded {
+            max-height: 0;
+            overflow: hidden;
+            transition: all var(--transition-slow);
+            text-align: left;
+            margin-top: 0;
+        }
+
+        .stat-card.expanded .stat-expanded {
+            max-height: 300px;
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--gray-300);
+        }
+
+        .stat-expanded h4 {
+            color: var(--cafn-dark);
+            margin-bottom: var(--space-sm);
+            font-size: var(--font-size-md);
+        }
+
+        .stat-expanded p {
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--space-sm);
+        }
+
+        .stat-expand-hint {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-size: var(--font-size-xs);
+            color: var(--text-muted);
+            opacity: 0.6;
+        }
+
+        /* Cultural Context Section */
+        .cultural-section {
+            background: linear-gradient(135deg, var(--cafn-dark) 0%, var(--cafn-dark-light) 100%);
+            color: var(--cafn-white);
+            padding: var(--space-3xl) var(--space-lg);
+        }
+
+        .cultural-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .cultural-section h2 {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--space-sm);
+        }
+
+        .cultural-section .translation {
+            color: var(--cafn-red);
+            font-size: var(--font-size-lg);
+            font-style: italic;
+            margin-bottom: var(--space-xl);
+        }
+
+        .cultural-section p {
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: var(--space-lg);
+        }
+
+        .cultural-values {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-xl);
+        }
+
+        .value-item {
+            padding: var(--space-lg);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .value-item h4 {
+            color: var(--cafn-red);
+            margin-bottom: var(--space-sm);
+            font-size: var(--font-size-md);
+        }
+
+        .value-item p {
+            font-size: var(--font-size-sm);
+            margin: 0;
         }
 
         /* Resources Section */
         .resources-section {
-            background: var(--cafn-dark);
-            padding: 80px 20px;
-        }
-
-        .resources-section .section-title {
-            color: var(--cafn-white);
+            background: var(--gray-200);
+            padding: var(--space-3xl) var(--space-lg);
         }
 
         .resources-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: var(--space-lg);
         }
 
-        .resource-category {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .resource-card {
+            background: var(--cafn-white);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-normal);
         }
 
-        .resource-category h3 {
-            color: var(--cafn-red);
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        .resource-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .resource-card h3 {
+            color: var(--cafn-dark);
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-sm);
+            border-bottom: 2px solid var(--cafn-red);
         }
 
         .resource-link {
             display: block;
-            color: var(--cafn-white);
             text-decoration: none;
-            padding: 12px 15px;
-            margin: 8px 0;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.03);
-            transition: all 0.2s ease;
+            padding: var(--space-md);
+            margin: var(--space-sm) 0;
+            border-radius: var(--radius-md);
+            background: var(--gray-100);
+            transition: all var(--transition-fast);
         }
 
         .resource-link:hover {
-            background: rgba(197, 10, 39, 0.2);
-            padding-left: 25px;
+            background: var(--cafn-red-light);
+            padding-left: 20px;
         }
 
         .resource-link .link-title {
-            font-weight: 600;
             display: block;
+            color: var(--cafn-dark);
+            font-weight: 600;
             margin-bottom: 4px;
         }
 
         .resource-link .link-desc {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.6);
+            display: block;
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
         }
 
         .resource-placeholder {
-            color: rgba(255, 255, 255, 0.4);
+            color: var(--text-muted);
             font-style: italic;
-            padding: 12px 15px;
+            padding: var(--space-md);
         }
 
-        /* Footer */
-        footer {
-            background: #0d0d1a;
-            padding: 30px 20px;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
-        }
-
-        footer .credit {
-            color: var(--cafn-white);
-            margin-bottom: 8px;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1.1rem;
-            }
-
-            .hero-logo {
-                width: 200px;
-            }
-
-            .section-title {
-                font-size: 1.6rem;
-            }
-
-            .stat-value {
-                font-size: 2rem;
-            }
-
-            .stats-section,
-            .resources-section {
-                padding: 60px 20px;
-            }
+            .hero h1 { font-size: 2.2rem; }
+            .hero .subtitle { font-size: 1.1rem; }
+            .hero-logo { width: 200px; }
+            .stat-value { font-size: 2rem; }
         }
     </style>
 </head>
@@ -292,6 +345,7 @@
         <div class="hero-content">
             <img src="CAFNLogo25white.svg" alt="CAFN Logo" class="hero-logo">
             <h1>Dá Kų Cultural Centre</h1>
+            <p class="translation">"Our House" in Southern Tutchone</p>
             <p class="subtitle">Building Efficiency & Energy Management</p>
             <p class="engineer">Ryan Kinna, Building Engineer</p>
         </div>
@@ -300,30 +354,111 @@
         </div>
     </section>
 
+    <!-- Highlight Banner -->
+    <section class="highlight-banner">
+        <h2>$54,437 Saved in 2025</h2>
+        <p>Through strategic heat pump investment and dedicated building management, we're protecting resources for future generations while leading in environmental stewardship.</p>
+    </section>
+
     <!-- Key Stats Section -->
     <section class="stats-section">
         <div class="container">
-            <h2 class="section-title">2025 Performance Highlights</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-value">$54,437</div>
-                    <div class="stat-label">Total Cumulative Savings</div>
-                    <div class="stat-detail">HVAC savings vs 2023 baseline</div>
+            <div class="section-header">
+                <h2>2025 Performance Highlights</h2>
+                <p>Click any card to learn more about what these numbers mean</p>
+            </div>
+            <div class="grid grid-auto">
+                <div class="stat-card" onclick="this.classList.toggle('expanded')">
+                    <div class="stat-value" data-counter="54437" data-prefix="$">$54,437</div>
+                    <div class="stat-label">Total HVAC Savings</div>
+                    <div class="stat-detail">vs 2023 baseline costs</div>
+                    <div class="stat-expanded">
+                        <h4>What This Means</h4>
+                        <p>By comparing our 2025 energy costs to what they would have been at 2023 efficiency levels, we can measure the true impact of our improvements.</p>
+                        <p><strong>This savings could fund:</strong></p>
+                        <p>- 725+ hours of cultural programming<br>
+                           - Materials for 200 language learners<br>
+                           - A full year of facility improvements</p>
+                    </div>
+                    <span class="stat-expand-hint">Click for details</span>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-value">36%</div>
+
+                <div class="stat-card" onclick="this.classList.toggle('expanded')">
+                    <div class="stat-value">41%</div>
                     <div class="stat-label">Efficiency Improvement</div>
                     <div class="stat-detail">Reduction in cost per HDD</div>
+                    <div class="stat-expanded">
+                        <h4>What This Means</h4>
+                        <p><strong>Cost per Heating Degree Day</strong> measures how efficiently we heat the building relative to outdoor temperatures.</p>
+                        <p>A 41% improvement means we're getting significantly more heating value for every dollar spent—even in a colder-than-average year.</p>
+                        <p><strong>2023:</strong> $30.82/HDD<br>
+                           <strong>2025:</strong> $18.23/HDD</p>
+                    </div>
+                    <span class="stat-expand-hint">Click for details</span>
                 </div>
-                <div class="stat-card">
+
+                <div class="stat-card" onclick="this.classList.toggle('expanded')">
                     <div class="stat-value">$66,765</div>
                     <div class="stat-label">2025 HVAC Cost</div>
                     <div class="stat-detail">Down from $112,783 in 2023</div>
+                    <div class="stat-expanded">
+                        <h4>What This Means</h4>
+                        <p>HVAC (Heating, Ventilation, Air Conditioning) is the largest component of our energy costs.</p>
+                        <p>The new heat pumps, installed Spring 2025, dramatically reduced our heating costs even as temperatures dropped.</p>
+                        <p><strong>Reduction:</strong> $46,018 (-41%)<br>
+                           <strong>Best Month:</strong> December at $5,341</p>
+                    </div>
+                    <span class="stat-expand-hint">Click for details</span>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-value">8,351</div>
+
+                <div class="stat-card" onclick="this.classList.toggle('expanded')">
+                    <div class="stat-value">8,352</div>
                     <div class="stat-label">Heating Degree Days</div>
                     <div class="stat-detail">Climate severity tracked</div>
+                    <div class="stat-expanded">
+                        <h4>What This Means</h4>
+                        <p><strong>Heating Degree Days (HDD)</strong> measure how cold the weather is. More HDD = colder weather = more heating needed.</p>
+                        <p>2025 was 9% colder than 2023, yet we still achieved massive savings. This proves our improvements work in real Yukon winter conditions.</p>
+                        <p><strong>2023:</strong> 7,663 HDD<br>
+                           <strong>2025:</strong> 8,352 HDD (+9%)</p>
+                    </div>
+                    <span class="stat-expand-hint">Click for details</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Environmental Impact Section -->
+    <section class="stats-section" style="background: var(--cafn-white);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Environmental Impact</h2>
+                <p>Our 2025 efficiency gains are equivalent to:</p>
+            </div>
+            <div id="envEquivalents"></div>
+        </div>
+    </section>
+
+    <!-- Cultural Context Section -->
+    <section class="cultural-section">
+        <div class="cultural-content">
+            <h2>Dá Kų - Our House</h2>
+            <p class="translation">"Our House" in Southern Tutchone (Dän k'è)</p>
+            <p>More than a building—Dá Kų is where our community gathers, where youth learn traditional practices, where elders share stories, and where the Dakwäkäda Dancers have performed for over 20 years.</p>
+            <p>Every dollar saved on energy is a dollar invested in our people. By reducing our building's environmental footprint, we honor our ancestors' tradition of careful stewardship while ensuring Dá Kų can serve future generations.</p>
+
+            <div class="cultural-values">
+                <div class="value-item">
+                    <h4>Environmental Stewardship</h4>
+                    <p>Following our ancestors who cared for this land for 8,000+ years, we reduce our footprint and lead by example.</p>
+                </div>
+                <div class="value-item">
+                    <h4>Fiscal Responsibility</h4>
+                    <p>Responsible management means stretching every dollar to serve our citizens and programs.</p>
+                </div>
+                <div class="value-item">
+                    <h4>Community Pride</h4>
+                    <p>CAFN leads the way for First Nations, showing what's possible with strategic investment.</p>
                 </div>
             </div>
         </div>
@@ -332,23 +467,30 @@
     <!-- Resources Section -->
     <section class="resources-section">
         <div class="container">
-            <h2 class="section-title">Resources</h2>
+            <div class="section-header">
+                <h2>Resources</h2>
+                <p>Explore detailed analysis and data</p>
+            </div>
             <div class="resources-grid">
-                <div class="resource-category">
+                <div class="resource-card">
                     <h3>Energy Reports</h3>
                     <a href="PowerReport.html" class="resource-link">
-                        <span class="link-title">Power Report</span>
-                        <span class="link-desc">Interactive charts and detailed efficiency analysis</span>
+                        <span class="link-title">Interactive Power Report</span>
+                        <span class="link-desc">Charts, analysis, and detailed breakdowns with audience-specific views</span>
                     </a>
                 </div>
-                <div class="resource-category">
+                <div class="resource-card">
                     <h3>Data & Analysis</h3>
                     <a href="DaKu_PowerUseMod v2.3.ods" class="resource-link">
                         <span class="link-title">Spreadsheet Data</span>
                         <span class="link-desc">Raw data and calculations (LibreOffice Calc)</span>
                     </a>
+                    <a href="energy_context.md" class="resource-link">
+                        <span class="link-title">Technical Documentation</span>
+                        <span class="link-desc">Data dictionary, methodology, and findings</span>
+                    </a>
                 </div>
-                <div class="resource-category">
+                <div class="resource-card">
                     <h3>Documentation</h3>
                     <p class="resource-placeholder">Presentations and upgrade documentation coming soon</p>
                 </div>
@@ -358,9 +500,66 @@
 
     <!-- Footer -->
     <footer>
-        <p class="credit">Ryan Kinna, Building Engineer</p>
-        <p>Last updated: January 2026</p>
+        <p class="credit">Ryan Kinna, Building Engineer | Champagne and Aishihik First Nations</p>
+        <p>Dá Kų Cultural Centre | Last updated: January 2026</p>
     </footer>
+
+    <!-- JavaScript -->
+    <script src="js/data.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/config.js"></script>
+    <script>
+        // Initialize environmental equivalents
+        document.addEventListener('DOMContentLoaded', function() {
+            const envContainer = document.getElementById('envEquivalents');
+            if (envContainer && typeof DakuComponents !== 'undefined') {
+                DakuComponents.createEnvironmentalEquivalents(envContainer, DakuData.environmental);
+            }
+
+            // Initialize scroll animations
+            if (typeof DakuComponents !== 'undefined' && DakuConfig.isEnabled('scrollAnimations')) {
+                DakuComponents.initScrollAnimations();
+            }
+
+            // Animate counters on first stat cards visible
+            const statCards = document.querySelectorAll('.stat-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target.querySelector('[data-counter]');
+                        if (counter && !counter.dataset.animated) {
+                            animateCounter(counter);
+                            counter.dataset.animated = 'true';
+                        }
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            statCards.forEach(card => observer.observe(card));
+        });
+
+        function animateCounter(element) {
+            const target = parseInt(element.dataset.counter);
+            const prefix = element.dataset.prefix || '';
+            const suffix = element.dataset.suffix || '';
+            const duration = 1500;
+            const startTime = performance.now();
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = Math.round(target * eased);
+                element.textContent = prefix + current.toLocaleString() + suffix;
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+
+            requestAnimationFrame(update);
+        }
+    </script>
 
 </body>
 </html>
