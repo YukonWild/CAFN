@@ -39,7 +39,7 @@ const DakuConfig = {
         defaultTab: 'executive',
 
         // Currency formatting
-        currency: 'USD',
+        currency: 'CAD',
         locale: 'en-US',
 
         // Number formatting
