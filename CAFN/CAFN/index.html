@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dá Kų Cultural Centre - Building Efficiency</title>
+    <style>
+        :root {
+            --cafn-dark: #1a1a2e;
+            --cafn-white: #ffffff;
+            --cafn-red: #c50a27;
+            --cafn-gray: #f4f6f7;
+            --cafn-text: #2c3e50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--cafn-dark);
+            color: var(--cafn-white);
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('daku.jpg') center center / cover no-repeat;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-logo {
+            width: 280px;
+            max-width: 80%;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 30px;
+        }
+
+        .hero .engineer {
+            font-size: 1.1rem;
+            color: var(--cafn-red);
+            font-weight: 600;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-hint span {
+            display: block;
+            width: 30px;
+            height: 30px;
+            border-right: 3px solid var(--cafn-white);
+            border-bottom: 3px solid var(--cafn-white);
+            transform: rotate(45deg);
+            opacity: 0.6;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--cafn-gray);
+            padding: 80px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--cafn-dark);
+            font-size: 2rem;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--cafn-red);
+            margin: 15px auto 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-card {
+            background: var(--cafn-white);
+            padding: 35px 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid var(--cafn-red);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--cafn-dark);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .stat-detail {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        /* Resources Section */
+        .resources-section {
+            background: var(--cafn-dark);
+            padding: 80px 20px;
+        }
+
+        .resources-section .section-title {
+            color: var(--cafn-white);
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .resource-category {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .resource-category h3 {
+            color: var(--cafn-red);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .resource-link {
+            display: block;
+            color: var(--cafn-white);
+            text-decoration: none;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            transition: all 0.2s ease;
+        }
+
+        .resource-link:hover {
+            background: rgba(197, 10, 39, 0.2);
+            padding-left: 25px;
+        }
+
+        .resource-link .link-title {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .resource-link .link-desc {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .resource-placeholder {
+            color: rgba(255, 255, 255, 0.4);
+            font-style: italic;
+            padding: 12px 15px;
+        }
+
+        /* Footer */
+        footer {
+            background: #0d0d1a;
+            padding: 30px 20px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        footer .credit {
+            color: var(--cafn-white);
+            margin-bottom: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .hero-logo {
+                width: 200px;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .stat-value {
+                font-size: 2rem;
+            }
+
+            .stats-section,
+            .resources-section {
+                padding: 60px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <img src="CAFNLogo25white.svg" alt="CAFN Logo" class="hero-logo">
+            <h1>Dá Kų Cultural Centre</h1>
+            <p class="subtitle">Building Efficiency & Energy Management</p>
+            <p class="engineer">Ryan Kinna, Building Engineer</p>
+        </div>
+        <div class="scroll-hint">
+            <span></span>
+        </div>
+    </section>
+
+    <!-- Key Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <h2 class="section-title">2025 Performance Highlights</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">$54,437</div>
+                    <div class="stat-label">Total Cumulative Savings</div>
+                    <div class="stat-detail">HVAC savings vs 2023 baseline</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">36%</div>
+                    <div class="stat-label">Efficiency Improvement</div>
+                    <div class="stat-detail">Reduction in cost per HDD</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">$66,765</div>
+                    <div class="stat-label">2025 HVAC Cost</div>
+                    <div class="stat-detail">Down from $112,783 in 2023</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">8,351</div>
+                    <div class="stat-label">Heating Degree Days</div>
+                    <div class="stat-detail">Climate severity tracked</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="resources-section">
+        <div class="container">
+            <h2 class="section-title">Resources</h2>
+            <div class="resources-grid">
+                <div class="resource-category">
+                    <h3>Energy Reports</h3>
+                    <a href="PowerReport.html" class="resource-link">
+                        <span class="link-title">Power Report</span>
+                        <span class="link-desc">Interactive charts and detailed efficiency analysis</span>
+                    </a>
+                </div>
+                <div class="resource-category">
+                    <h3>Data & Analysis</h3>
+                    <a href="DaKu_PowerUseMod v2.3.ods" class="resource-link">
+                        <span class="link-title">Spreadsheet Data</span>
+                        <span class="link-desc">Raw data and calculations (LibreOffice Calc)</span>
+                    </a>
+                </div>
+                <div class="resource-category">
+                    <h3>Documentation</h3>
+                    <p class="resource-placeholder">Presentations and upgrade documentation coming soon</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="credit">Ryan Kinna, Building Engineer</p>
+        <p>Last updated: January 2026</p>
+    </footer>
+
+</body>
+</html>
