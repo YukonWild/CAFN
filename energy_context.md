@@ -243,3 +243,55 @@ Compares what costs would have been at previous efficiency levels to actual cost
 - Model for other northern community buildings
 - Quantifiable environmental benefits through reduced energy use
 - Potential for replication across CAFN facilities
+
+---
+
+## Environmental Equivalents
+
+Our 2025 efficiency gains (149,700 kWh saved) translate to:
+
+| Equivalent | Value | Methodology |
+|------------|-------|-------------|
+| Trees Planted | ~450 | Tree seedlings grown 10 years @ 15.5 kg CO2/tree/year |
+| Cars Off Road | ~17 | Avg car emits 4.6 metric tons CO2/year |
+| Homes Powered | ~16 | Avg Yukon home uses 11,000 kWh/year |
+| CO2 Avoided | ~70 tons | Yukon grid factor: 0.47 kg CO2/kWh |
+
+*Source: EPA Greenhouse Gas Equivalencies Calculator methodology*
+
+---
+
+## Data Architecture
+
+### JavaScript Data Module (`js/data.js`)
+
+All data in this document is also available programmatically in the `DakuData` object:
+
+```javascript
+// Access electricity data
+DakuData.electricity.usage[2025]      // Monthly usage array
+DakuData.electricity.hvacCost[2025]   // Monthly HVAC costs
+DakuData.electricity.hdd[2025]        // Monthly HDD values
+
+// Access KPIs
+DakuData.kpis[2025].totalCost         // $98,111
+DakuData.kpis[2025].hvacCost          // $66,765
+
+// Access savings
+DakuData.savings.hvacCumulative       // Monthly cumulative array
+DakuData.savings.annualHvac[2025]     // $54,437
+
+// Helper functions
+DakuData.getHvacUsage(2025)           // Returns HVAC-only usage
+DakuData.getKwhPerHdd(2025)           // Returns efficiency ratio
+DakuData.getEfficiencyImprovement(2025, 2023)  // Returns 41%
+```
+
+### Future Data Templates
+
+The data module includes templates for planned integrations:
+- `DakuData.heatingFuel` - Propane/oil consumption
+- `DakuData.carbon` - Scope 1, Scope 2, offsets
+- `DakuData.occupancy` - Events, person-hours
+
+Set `enabled: true` when data is populated.
