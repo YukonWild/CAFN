@@ -185,6 +185,16 @@
 
 <div class="container" style="padding: var(--space-xl) var(--space-lg);">
 
+    <!-- Scope Clarification Banner -->
+    <div class="scope-banner">
+        <div class="scope-content">
+            <div class="scope-icon">⚡</div>
+            <div class="scope-text">
+                <strong>Electrical Savings Only:</strong> This report covers electricity cost reductions through HVAC system optimization. Fuel oil heating costs are not included in this analysis. Heating fuel savings from improved system efficiency will likely result in substantial additional cost reductions.
+            </div>
+        </div>
+    </div>
+
     <!-- Tab Navigation -->
     <div class="tab-nav" id="mainTabs">
         <button class="tab-btn active" data-tab="executive" onclick="switchTab('executive')">
@@ -193,8 +203,8 @@
         <button class="tab-btn" data-tab="technical" onclick="switchTab('technical')">
             Technical Detail
         </button>
-        <button class="tab-btn" data-tab="community" onclick="switchTab('community')">
-            Community Impact
+        <button class="tab-btn" data-tab="contributions" onclick="switchTab('contributions')">
+            Technical Contributions
         </button>
     </div>
 
@@ -311,7 +321,7 @@
                 <span class="value">8,622 kWh/month</span>
             </div>
             <div class="quick-fact">
-                <span class="label">Heat Pumps Installed</span>
+                <span class="label">Heat Pump Controls Reprogrammed</span>
                 <span class="value">Spring 2025</span>
             </div>
             <div class="quick-fact">
@@ -402,7 +412,7 @@
                 <div class="chart-wrapper">
                     <canvas id="costIntensityChart"></canvas>
                 </div>
-                <div class="chart-note">Heat pumps installed Spring 2025</div>
+                <div class="chart-note">Heat pump controls reprogrammed Spring 2025</div>
             </div>
 
             <div class="chart-container full-width expandable" onclick="toggleChartExpand(this)">
@@ -542,91 +552,339 @@
     <!-- ========================================== -->
     <!-- COMMUNITY IMPACT TAB -->
     <!-- ========================================== -->
-    <div id="community" class="tab-content" style="display: none;">
+    <div id="contributions" class="tab-content" style="display: none;">
 
-        <!-- Impact Story -->
-        <div class="impact-story">
-            <h3>Investing in Our Future</h3>
-            <p>Dá Kų, meaning "Our House" in Southern Tutchone, is the heart of our community. It's where the Dakwäkäda Dancers have performed for over 10 years, where youth learn their language, and where elders share knowledge with new generations.</p>
-            <p>Every dollar saved on energy is a dollar we can invest in our people. In 2025, our building efficiency improvements saved <strong>$54,437</strong>—resources that support cultural programming, language preservation, and community gatherings.</p>
+        <!-- Status Legend -->
+        <div class="status-legend">
+            <span class="legend-item"><span class="check-icon completed">✓</span> Completed</span>
+            <span class="legend-item"><span class="check-icon ongoing">⟳</span> Ongoing</span>
+            <span class="legend-item"><span class="check-icon priority">⚠</span> Identified Priority</span>
+        </div>
 
-            <div class="impact-grid">
-                <div class="impact-card">
-                    <h4>Cultural Programming</h4>
-                    <div class="value">725+ Hours</div>
-                    <p>Potential additional programming funded by savings</p>
+        <!-- Summary Banner -->
+        <div class="contributions-summary">
+            <h2>Building Systems Engineering Excellence</h2>
+            <p>Comprehensive facility optimization across 2 buildings</p>
+            <div class="summary-metrics">
+                <div class="metric-card">
+                    <div class="value">50+</div>
+                    <div class="label">Systems Optimized</div>
                 </div>
-                <div class="impact-card">
-                    <h4>Language Learners</h4>
-                    <div class="value">200+</div>
-                    <p>Materials and resources that could be supported</p>
+                <div class="metric-card">
+                    <div class="value">100+</div>
+                    <div class="label">Issues Remediated</div>
                 </div>
-                <div class="impact-card">
-                    <h4>Environmental Leadership</h4>
-                    <div class="value">70 Tons</div>
-                    <p>CO2 emissions avoided annually</p>
+                <div class="metric-card">
+                    <div class="value">$54,437</div>
+                    <div class="label">Electrical Savings</div>
                 </div>
-                <div class="impact-card">
-                    <h4>Future Savings</h4>
-                    <div class="value">$330K+</div>
-                    <p>Projected 5-year cumulative savings</p>
+                <div class="metric-card">
+                    <div class="value">2</div>
+                    <div class="label">Facilities Managed</div>
                 </div>
             </div>
         </div>
 
-        <!-- Environmental Impact for Community -->
-        <div class="section-header">
-            <h2>Environmental Stewardship</h2>
-            <p>Honoring our ancestors' care for the land</p>
-        </div>
-
-        <div id="communityEnvEquivalents"></div>
-
-        <!-- Community-focused charts -->
-        <div class="section-header" style="margin-top: var(--space-2xl);">
-            <h2>Our Progress</h2>
-            <p>Seeing our achievements over time</p>
-        </div>
-
-        <div class="charts-grid">
-            <div class="chart-container expandable" onclick="toggleChartExpand(this)">
-                <div class="chart-header">
-                    <div>
-                        <div class="chart-title">Growing Savings</div>
-                        <div class="chart-subtitle">Each month adds to our success</div>
-                    </div>
-                </div>
-                <div class="chart-wrapper">
-                    <canvas id="communitySavingsChart"></canvas>
+        <!-- BMS & Controls -->
+        <div class="category-section">
+            <div class="category-header">
+                <span class="category-icon">🖥️</span>
+                <div>
+                    <h3>Building Management System (BMS) & Controls</h3>
+                    <p>Software infrastructure and digital systems</p>
                 </div>
             </div>
-
-            <div class="chart-container expandable" onclick="toggleChartExpand(this)">
-                <div class="chart-header">
-                    <div>
-                        <div class="chart-title">Year-Over-Year Improvement</div>
-                        <div class="chart-subtitle">Costs decreasing each year</div>
-                    </div>
+            <div class="accomplishment-list">
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Upgraded Niagara BMS software to most recent version</strong></div>
                 </div>
-                <div class="chart-wrapper">
-                    <canvas id="communityComparisonChart"></canvas>
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Security hardening:</strong> Removed legacy passwords, implemented secure protocols</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon ongoing">⟳</span>
+                    <div class="text"><strong>Testing high-availability cluster setup</strong> to minimize downtime</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon ongoing">⟳</span>
+                    <div class="text"><strong>Creating local database service</strong> for equipment/procedures/services</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Built brand new control logic for Language Hub</strong> from ground up</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Created intuitive graphics</strong> for Language Hub operators</div>
+                </div>
+            </div>
+            <div class="impact-highlights">
+                <div class="impact-badge">
+                    <div class="badge-value">Enhanced</div>
+                    <div class="badge-label">System Security</div>
+                </div>
+                <div class="impact-badge">
+                    <div class="badge-value">Improved</div>
+                    <div class="badge-label">Uptime via Redundancy</div>
+                </div>
+                <div class="impact-badge">
+                    <div class="badge-value">Centralized</div>
+                    <div class="badge-label">Documentation</div>
                 </div>
             </div>
         </div>
 
-        <!-- Future Outlook -->
-        <div class="section-header" style="margin-top: var(--space-2xl);">
-            <h2>Looking Ahead</h2>
-            <p>Projected benefits for our community</p>
+        <!-- HVAC System Optimization -->
+        <div class="category-section">
+            <div class="category-header">
+                <span class="category-icon">❄️</span>
+                <div>
+                    <h3>HVAC System Optimization</h3>
+                    <p>Heating, ventilation, and air conditioning improvements</p>
+                </div>
+            </div>
+            <div class="accomplishment-list">
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Fixed 3 largest air handlers</strong> - no outside air exchange due to logic/sensor failures</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Instituted VFD logic on 7 drives</strong> (converted from binary on/off to demand-based control)</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Reprogrammed heat pump logic</strong> for shoulder season heat recovery (up to 1 month early)</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Reconfigured winter cooling system logic</strong> (60% more efficient)</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Reprogrammed occupancy sensor logic</strong> (was previously ineffective)</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Adjusted cooling set points</strong> (preventing condensation/corrosion)</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Reduced cooling pump speeds</strong> through experimentation (excellent results)</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Refactored archive/collections room logic</strong> (tighter temp/humidity control)</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Reduced hot water supply temperature</strong> (preventing glycol burning)</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon ongoing">⟳</span>
+                    <div class="text"><strong>Tuning all PID loops</strong> one-by-one (ongoing, many months remaining)</div>
+                </div>
+            </div>
+            <div class="impact-highlights">
+                <div class="impact-badge">
+                    <div class="badge-value">41%</div>
+                    <div class="badge-label">Efficiency Improvement</div>
+                </div>
+                <div class="impact-badge">
+                    <div class="badge-value">$54,437</div>
+                    <div class="badge-label">HVAC Savings (2025)</div>
+                </div>
+                <div class="impact-badge">
+                    <div class="badge-value">7</div>
+                    <div class="badge-label">VFDs - Demand Control</div>
+                </div>
+                <div class="impact-badge">
+                    <div class="badge-value">60%</div>
+                    <div class="badge-label">Winter Cooling Efficiency</div>
+                </div>
+            </div>
         </div>
 
-        <div id="communityProjections"></div>
+        <!-- System Commissioning & Remediation -->
+        <div class="category-section">
+            <div class="category-header">
+                <span class="category-icon">🔧</span>
+                <div>
+                    <h3>System Commissioning & Remediation</h3>
+                    <p>Identifying and fixing critical system failures</p>
+                </div>
+            </div>
+            <div class="accomplishment-list">
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Extensive HVAC audit</strong> identifying inefficiencies, failures, misconfigured sensors</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Located and remediated failed sensors,</strong> commissioned new sensors</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Completed uncompleted logic configurations</strong> and commissioning work</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Reconfigured hot water system/boilers</strong> to original design specifications</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Fixed heat exchanger issues</strong> causing short cycling</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Installed automatic resets to 3 alarm disconnects</strong> (eliminated manual site visits)</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Audited booster pumps</strong> (many unnecessary, validated on design load days)</div>
+                </div>
+            </div>
+            <div class="context-note">
+                <strong>Note:</strong> Regional shortage of qualified Niagara programmers - specialized expertise critical to facility operation. Arcright has been unable to secure programming contractor for many months.
+            </div>
+            <div class="impact-highlights">
+                <div class="impact-badge">
+                    <div class="badge-value">Remediated</div>
+                    <div class="badge-label">Multiple Sensor Failures</div>
+                </div>
+                <div class="impact-badge">
+                    <div class="badge-value">Completed</div>
+                    <div class="badge-label">Unfinished Commissioning</div>
+                </div>
+                <div class="impact-badge">
+                    <div class="badge-value">Eliminated</div>
+                    <div class="badge-label">Manual Alarm Resets</div>
+                </div>
+            </div>
+        </div>
 
-        <!-- Community Message -->
-        <div class="impact-story" style="margin-top: var(--space-2xl);">
-            <h3>Leading by Example</h3>
-            <p>CAFN's investment in building efficiency demonstrates responsible stewardship and forward-thinking governance. Our success shows other First Nations communities what's possible with strategic investment in sustainable infrastructure.</p>
-            <p>As we continue this journey, we honor our ancestors who cared for this land for over 8,000 years, while building a sustainable future for the next seven generations.</p>
+        <!-- Preventive Maintenance & Infrastructure -->
+        <div class="category-section">
+            <div class="category-header">
+                <span class="category-icon">🛡️</span>
+                <div>
+                    <h3>Preventive Maintenance & Infrastructure</h3>
+                    <p>Proactive equipment reliability and upkeep</p>
+                </div>
+            </div>
+            <div class="accomplishment-list">
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Mechanical inspections:</strong> belts, bearings, alignments (with William's support)</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon priority">⚠</span>
+                    <div class="text"><strong>Identified 1 failed heat pump</strong> for replacement</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon priority">⚠</span>
+                    <div class="text"><strong>Identified need for glycol replacement</strong> (spring priority due to burning from previous high temps)</div>
+                </div>
+            </div>
+            <div class="impact-highlights">
+                <div class="impact-badge">
+                    <div class="badge-value">Proactive</div>
+                    <div class="badge-label">Equipment Reliability</div>
+                </div>
+                <div class="impact-badge">
+                    <div class="badge-value">Early</div>
+                    <div class="badge-label">Detection Preventing Failures</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Language Hub Facility -->
+        <div class="category-section">
+            <div class="category-header">
+                <span class="category-icon">🏛️</span>
+                <div>
+                    <h3>Language Hub Facility</h3>
+                    <p>Critical controls and safety remediation (second facility)</p>
+                </div>
+            </div>
+            <div class="accomplishment-list">
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Extensive HVAC audit</strong> identifying significant control and safety issues</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon priority">⚠</span>
+                    <div class="text"><strong>CRITICAL: Fire notification system</strong> inadequate/non-existent (replacement initiated)</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Fixed boiler configuration</strong> (was internal looping causing extremely high temps, damaging boilers/glycol)</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Reduced boiler temps</strong> to appropriate radiant floor set point</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Fixed disconnected/shorted thermostats</strong> from construction</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon completed">✓</span>
+                    <div class="text"><strong>Corrected misconfigured wiring</strong> between thermostats and zone valves (e.g., admin office had no heat since construction)</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon priority">⚠</span>
+                    <div class="text"><strong>Identified air handling system problems</strong> (insufficient air exchange, no fresh air preheat)</div>
+                </div>
+                <div class="accomplishment-item">
+                    <span class="check-icon priority">⚠</span>
+                    <div class="text"><strong>Identified HRV outdoor air intake issue</strong> (located near vehicle parking and boiler exhaust)</div>
+                </div>
+            </div>
+            <div class="context-note">
+                <strong>Ongoing Work:</strong> Building brand new logic from ground up (previous logic was entirely nonexistent) and creating new intuitive graphics for operators.
+            </div>
+            <div class="impact-highlights">
+                <div class="impact-badge priority">
+                    <div class="badge-value">CRITICAL</div>
+                    <div class="badge-label">Fire Safety Replacement Initiated</div>
+                </div>
+                <div class="impact-badge">
+                    <div class="badge-value">RESOLVED</div>
+                    <div class="badge-label">Heating Wiring/Config Issues</div>
+                </div>
+                <div class="impact-badge priority">
+                    <div class="badge-value">IDENTIFIED</div>
+                    <div class="badge-label">Ventilation Deficiencies</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Competencies -->
+        <div class="category-section">
+            <div class="category-header">
+                <span class="category-icon">⚡</span>
+                <div>
+                    <h3>Technical Competencies</h3>
+                    <p>Expert capabilities demonstrated across both facilities</p>
+                </div>
+            </div>
+            <div class="skills-matrix">
+                <div class="skill-tag">Niagara BMS Programming</div>
+                <div class="skill-tag">HVAC Controls Logic</div>
+                <div class="skill-tag">PID Loop Tuning</div>
+                <div class="skill-tag">System Commissioning</div>
+                <div class="skill-tag">Energy Optimization</div>
+                <div class="skill-tag">Security Hardening</div>
+                <div class="skill-tag">Database Architecture</div>
+                <div class="skill-tag">Sensor Diagnostics</div>
+                <div class="skill-tag">VFD Configuration</div>
+                <div class="skill-tag">Fire Safety Systems</div>
+                <div class="skill-tag">Preventive Maintenance</div>
+                <div class="skill-tag">Multi-Facility Management</div>
+            </div>
         </div>
 
     </div>
@@ -669,9 +927,9 @@ function switchTab(tabId) {
         initTechnicalCharts();
         window.techChartsInitialized = true;
     }
-    if (tabId === 'community' && !window.communityChartsInitialized) {
-        initCommunityCharts();
-        window.communityChartsInitialized = true;
+    if (tabId === 'contributions' && !window.contributionsInitialized) {
+        initContributionsTab();
+        window.contributionsInitialized = true;
     }
 
     // Resize charts after tab switch
@@ -925,7 +1183,7 @@ function initTechnicalCharts() {
                     backgroundColor: colors.year2024.bg
                 },
                 {
-                    label: '2025 (Heat Pumps)',
+                    label: '2025 (Optimized Controls)',
                     data: shoulderIndices.map(i => DakuData.electricity.hvacCost[2025][i]),
                     backgroundColor: colors.year2025.bg
                 }
@@ -1019,108 +1277,15 @@ function initTechnicalCharts() {
     });
 }
 
-// Community Tab Charts
+// Contributions Tab Initialization
+function initContributionsTab() {
+    // Contributions tab doesn't require chart initialization
+    // All content is static HTML from the data structure
+}
+
+// Community Tab Charts (legacy - kept for reference if needed)
 function initCommunityCharts() {
-    // Environmental Equivalents
-    const commEnv = document.getElementById('communityEnvEquivalents');
-    if (commEnv) {
-        DakuComponents.createEnvironmentalEquivalents(commEnv, DakuData.environmental);
-    }
-
-    // Community Savings Chart (simpler)
-    new Chart(document.getElementById('communitySavingsChart'), {
-        type: 'line',
-        data: {
-            labels: DakuData.months,
-            datasets: [{
-                label: 'Total Savings',
-                data: DakuData.savings.hvacCumulative,
-                borderColor: colors.success,
-                backgroundColor: 'rgba(46, 125, 50, 0.2)',
-                fill: true,
-                tension: 0.4,
-                pointRadius: 6,
-                pointBackgroundColor: colors.success
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false },
-                datalabels: {
-                    display: (ctx) => ctx.dataIndex === 11, // Only show last
-                    anchor: 'end',
-                    align: 'top',
-                    formatter: v => '$' + Math.round(v/1000) + 'k',
-                    font: { weight: 'bold', size: 14 },
-                    color: colors.success
-                },
-                tooltip: {
-                    callbacks: {
-                        label: ctx => '$' + ctx.parsed.y.toLocaleString() + ' saved so far'
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: { callback: v => '$' + (v/1000) + 'k' },
-                    title: { display: true, text: 'Savings ($)' }
-                }
-            }
-        }
-    });
-
-    // Community Comparison (simple)
-    new Chart(document.getElementById('communityComparisonChart'), {
-        type: 'bar',
-        data: {
-            labels: ['2023', '2024', '2025'],
-            datasets: [{
-                label: 'HVAC Cost',
-                data: [
-                    DakuData.kpis[2023].hvacCost,
-                    DakuData.kpis[2024].hvacCost,
-                    DakuData.kpis[2025].hvacCost
-                ],
-                backgroundColor: [colors.year2023.bg, colors.year2024.bg, colors.year2025.bg],
-                borderColor: [colors.year2023.border, colors.year2024.border, colors.year2025.border],
-                borderWidth: 2
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false },
-                datalabels: {
-                    anchor: 'end',
-                    align: 'top',
-                    formatter: v => '$' + Math.round(v/1000) + 'k',
-                    font: { weight: 'bold' }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: ctx => 'HVAC Cost: $' + ctx.parsed.y.toLocaleString()
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: { callback: v => '$' + (v/1000) + 'k' },
-                    title: { display: true, text: 'Annual HVAC Cost ($)' }
-                }
-            }
-        }
-    });
-
-    // Community Projections
-    const projContainer = document.getElementById('communityProjections');
-    if (projContainer) {
-        DakuComponents.createProjections(projContainer, DakuData);
-    }
+    // This function is deprecated - using contributions tab instead
 }
 
 // ==========================================
