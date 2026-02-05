@@ -16,10 +16,11 @@ const DakuData = {
         organization: "Champagne and Aishihik First Nations",
         engineer: "Ryan Kinna",
         dataSource: "DaKu_PowerUseMod v2.3",
-        lastUpdated: "January 2026",
+        lastUpdated: "February 2026",
         analysisYears: [2023, 2024, 2025],
         baselineYear: 2023,
-        heatPumpInstalled: "Spring 2025"
+        heatPumpOptimization: "Spring 2025",
+        note: "Heat pumps were previously installed but never properly configured for heat recovery. Logic reprogramming enabled effective shoulder season heating."
     },
 
     // Time periods
@@ -143,6 +144,146 @@ const DakuData = {
             moderate: { priceIncrease: 0.05, multiplier: 1.1 }, // 5% annual
             aggressive: { priceIncrease: 0.08, multiplier: 1.25 } // 8% annual
         }
+    },
+
+    // Technical Contributions Data
+    contributions: {
+        summary: {
+            systemsOptimized: "50+",
+            issuesRemediated: "100+",
+            electricalSavings: "$54,437",
+            facilitiesManaged: 2
+        },
+
+        categories: [
+            {
+                id: "bms",
+                name: "Building Management System (BMS) & Controls",
+                subtitle: "Software infrastructure and digital systems",
+                icon: "🖥️",
+                facility: "Dá Kų & Language Hub",
+                accomplishments: [
+                    { status: "completed", text: "Upgraded Niagara BMS software to most recent version" },
+                    { status: "completed", text: "Security hardening: Removed legacy passwords, implemented secure protocols" },
+                    { status: "ongoing", text: "Testing high-availability cluster setup to minimize downtime" },
+                    { status: "ongoing", text: "Creating local database service for equipment/procedures/services" },
+                    { status: "completed", text: "Built brand new control logic for Language Hub from ground up" },
+                    { status: "completed", text: "Created intuitive graphics for Language Hub operators" }
+                ],
+                impacts: [
+                    { value: "Enhanced", label: "System Security" },
+                    { value: "Improved", label: "Uptime via Redundancy" },
+                    { value: "Centralized", label: "Documentation" }
+                ]
+            },
+            {
+                id: "hvac",
+                name: "HVAC System Optimization",
+                subtitle: "Heating, ventilation, and air conditioning improvements",
+                icon: "❄️",
+                facility: "Dá Kų",
+                accomplishments: [
+                    { status: "completed", text: "Fixed 3 largest air handlers - no outside air exchange due to logic/sensor failures" },
+                    { status: "completed", text: "Instituted VFD logic on 7 drives (converted from binary on/off to demand-based control)" },
+                    { status: "completed", text: "Reprogrammed heat pump logic for shoulder season heat recovery (up to 1 month early)" },
+                    { status: "completed", text: "Reconfigured winter cooling system logic (60% more efficient)" },
+                    { status: "completed", text: "Reprogrammed occupancy sensor logic (was previously ineffective)" },
+                    { status: "completed", text: "Adjusted cooling set points (preventing condensation/corrosion)" },
+                    { status: "completed", text: "Reduced cooling pump speeds through experimentation (excellent results)" },
+                    { status: "completed", text: "Refactored archive/collections room logic (tighter temp/humidity control)" },
+                    { status: "completed", text: "Reduced hot water supply temperature (preventing glycol burning)" },
+                    { status: "ongoing", text: "Tuning all PID loops one-by-one (ongoing, many months remaining)" }
+                ],
+                impacts: [
+                    { value: "41%", label: "Efficiency Improvement" },
+                    { value: "$54,437", label: "HVAC Savings (2025)" },
+                    { value: "7", label: "VFDs - Demand Control" },
+                    { value: "60%", label: "Winter Cooling Efficiency" }
+                ]
+            },
+            {
+                id: "commissioning",
+                name: "System Commissioning & Remediation",
+                subtitle: "Identifying and fixing critical system failures",
+                icon: "🔧",
+                facility: "Dá Kų",
+                accomplishments: [
+                    { status: "completed", text: "Extensive HVAC audit identifying inefficiencies, failures, misconfigured sensors" },
+                    { status: "completed", text: "Located and remediated failed sensors, commissioned new sensors" },
+                    { status: "completed", text: "Completed many uncompleted logic configurations and commissioning" },
+                    { status: "completed", text: "Reconfigured hot water system/boilers to original design specifications" },
+                    { status: "completed", text: "Fixed heat exchanger issues causing short cycling" },
+                    { status: "completed", text: "Installed automatic resets to 3 alarm disconnects (eliminated manual site visits)" },
+                    { status: "completed", text: "Audited booster pumps (many unnecessary, validated on design load days)" }
+                ],
+                impacts: [
+                    { value: "Remediated", label: "Multiple Sensor Failures" },
+                    { value: "Completed", label: "Unfinished Commissioning" },
+                    { value: "Eliminated", label: "Manual Alarm Resets" }
+                ],
+                contextNote: "Note: Regional shortage of qualified Niagara programmers - specialized expertise critical to facility operation. Arcright has been unable to secure programming contractor for many months."
+            },
+            {
+                id: "maintenance",
+                name: "Preventive Maintenance & Infrastructure",
+                subtitle: "Proactive equipment reliability and upkeep",
+                icon: "🛡️",
+                facility: "Dá Kų",
+                accomplishments: [
+                    { status: "completed", text: "Mechanical inspections: belts, bearings, alignments (with William's support)" },
+                    { status: "priority", text: "Identified 1 failed heat pump for replacement" },
+                    { status: "priority", text: "Identified need for glycol replacement (spring priority due to burning from previous high temps)" }
+                ],
+                impacts: [
+                    { value: "Proactive", label: "Equipment Reliability Program" },
+                    { value: "Early", label: "Detection Preventing Failures" }
+                ]
+            },
+            {
+                id: "languageHub",
+                name: "Language Hub Facility",
+                subtitle: "Critical controls and safety remediation",
+                icon: "🏛️",
+                facility: "Language Hub",
+                accomplishments: [
+                    { status: "completed", text: "Extensive HVAC audit identifying significant control and safety issues" },
+                    { status: "priority", text: "Addressed inadequate/non-existent fire notification system (replacement initiated)" },
+                    { status: "completed", text: "Fixed boiler configuration (was internal looping causing extremely high temps, damaging boilers/glycol)" },
+                    { status: "completed", text: "Reduced boiler temps to appropriate radiant floor set point" },
+                    { status: "completed", text: "Fixed disconnected/shorted thermostats from construction" },
+                    { status: "completed", text: "Corrected misconfigured wiring between thermostats and zone valves (e.g., admin office had no heat potentially since building was built)" },
+                    { status: "priority", text: "Identified air handling system problems (insufficient air exchange, no fresh air preheat)" },
+                    { status: "priority", text: "Identified HRV outdoor air intake issue (located near vehicle parking and boiler exhaust)" }
+                ],
+                impacts: [
+                    { value: "CRITICAL", label: "Fire Safety Replacement Initiated", priority: true },
+                    { value: "RESOLVED", label: "Heating Wiring/Config Issues" },
+                    { value: "IDENTIFIED", label: "Ventilation Deficiencies" }
+                ],
+                ongoingWork: "Building brand new logic from ground up (previous logic was entirely nonexistent) and creating new intuitive graphics for operators"
+            },
+            {
+                id: "skills",
+                name: "Technical Competencies",
+                subtitle: "Expert capabilities demonstrated across projects",
+                icon: "⚡",
+                facility: "Both Facilities",
+                skills: [
+                    "Niagara BMS Programming",
+                    "HVAC Controls Logic",
+                    "PID Loop Tuning",
+                    "System Commissioning",
+                    "Energy Optimization",
+                    "Security Hardening",
+                    "Database Architecture",
+                    "Sensor Diagnostics",
+                    "VFD Configuration",
+                    "Fire Safety Systems",
+                    "Preventive Maintenance",
+                    "Multi-Facility Management"
+                ]
+            }
+        ]
     },
 
     // ================================================

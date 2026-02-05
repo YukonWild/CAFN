@@ -5,7 +5,9 @@
 - **Branch**: main
 
 ## Project Overview
-Building efficiency and energy management resources for the Dá Kų Cultural Centre ("Our House" in Southern Tutchone), managed by Ryan Kinna (Building Engineer) for Champagne and Aishihik First Nations (CAFN).
+Professional portfolio demonstrating technical contributions and building systems engineering excellence at the Dá Kų Cultural Centre ("Our House" in Southern Tutchone), managed by Ryan Kinna (Building Engineer) for Champagne and Aishihik First Nations (CAFN). This presentation showcases value for contract renegotiation discussions.
+
+**Scope Note**: This analysis focuses on **electrical savings only**. Fuel oil heating costs are not included in the reported savings. Heating fuel improvements through optimized controls will likely result in substantial additional cost reductions.
 
 ## Key Metrics (2025)
 | Metric | Value |
@@ -73,18 +75,24 @@ Building efficiency and energy management resources for the Dá Kų Cultural Cen
    - HVAC system breakdown
    - Annual and monthly data tables
 
-3. **Community Impact**
-   - Impact story narrative
-   - Program funding equivalents (725+ hours, 200+ learners)
-   - Environmental stewardship framing
-   - Simplified charts
-   - Future outlook projections
+3. **Technical Contributions** *(formerly Community Impact)*
+   - Status legend (Completed ✓, Ongoing ⟳, Priority ⚠)
+   - Summary metrics (50+ systems, 100+ issues, 2 facilities)
+   - 6 Professional achievement categories:
+     1. **BMS & Controls** (6 accomplishments, security hardening, redundancy)
+     2. **HVAC System Optimization** (10 accomplishments, 41% efficiency gain)
+     3. **System Commissioning & Remediation** (7 accomplishments with context note on technical expertise shortage)
+     4. **Preventive Maintenance & Infrastructure** (proactive equipment management)
+     5. **Language Hub Facility** (8 critical remediation items including fire safety)
+     6. **Technical Competencies** (12-skill matrix: Niagara, HVAC controls, PID tuning, etc.)
+   - Impact highlights and achievement metrics
 
 **Interactive Features:**
 - Click-to-expand charts (full-screen modal)
 - Tab lazy-loading (charts initialize on tab switch)
 - Scenario selector for projections (conservative/moderate/aggressive)
 - Environmental equivalents with methodology modal
+- Electrical-only scope banner on landing page and report
 
 ### Modular JavaScript Architecture
 
@@ -131,8 +139,9 @@ Building efficiency and energy management resources for the Dá Kų Cultural Cen
 ## Data Sources
 - **Primary**: `DaKu_PowerUseMod v2.3.xlsx` (ATCO billing data, inflation-adjusted)
 - **Period**: January 2023 - December 2025
-- **Key Event**: Heat pumps installed Spring 2025
+- **Key Optimization**: Heat pump controls reprogrammed Spring 2025 (previously installed but not properly configured)
 - **Base Load**: 8,622 kWh/month (constant non-HVAC)
+- **Note**: Heat pumps were already installed but lacked proper heat recovery logic. Logic reprogramming enabled effective shoulder season heating.
 
 ## Cultural Context
 - **Dá Kų** = "Our House" in Southern Tutchone (Dän k'è)
@@ -142,9 +151,9 @@ Building efficiency and energy management resources for the Dá Kų Cultural Cen
 - **Heritage**: 8,000+ years of continuous habitation
 
 ## Narrative Framing
-1. **Environmental Stewardship** - Climate action aligned with traditional values
-2. **Fiscal Responsibility** - Cost savings, ROI, budget management
-3. **Community Pride** - CAFN as model for other First Nations
+1. **Technical Excellence** - Comprehensive systems engineering expertise across multiple domains
+2. **Fiscal Responsibility** - Cost savings, ROI, infrastructure value maximization
+3. **Operational Value** - Multi-facility management, proactive problem-solving, critical expertise
 
 ## Future Data Integration (Planned)
 The modular architecture supports adding:
@@ -165,7 +174,18 @@ To add new data:
 - CSS Grid/Flexbox for responsive layout
 - Intersection Observer for scroll animations
 
-## Recent Changes (January 2026)
+## Recent Changes (February 2026)
+- **Major refactoring**: Transformed from community-focused narrative to professional portfolio
+- **Replaced Community Impact tab** with Technical Contributions tab (6 categories, 50+ systems)
+- **Added electrical-only scope banner** to landing page and PowerReport
+- **Updated metadata**: `heatPumpOptimization` (reprogrammed, not installed)
+- **Rewrote cultural section** from first-person to third-person professional tone
+- **Removed**: "Following our ancestors" text, funding equivalents, community pride language
+- **Added**: Status legend (✓ ⟳ ⚠), context notes, critical fire safety remediation, Language Hub facility
+- **Updated highlight banner**: Removed "strategic heat pump investment" language
+- **Added value cards**: Removed Environmental Stewardship, reframed as Operational Excellence
+
+### Historical Changes (January 2026)
 - Added modular JavaScript architecture (js/ folder)
 - Created audience-specific tabs (Executive, Technical, Community)
 - Added click-to-expand chart functionality
